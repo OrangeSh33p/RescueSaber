@@ -12,7 +12,7 @@ public class Character : MonoBehaviour {
 	public State state;
 	public float walkSpeed;
 	public Transform visuals;
-	public enum Hunger {STARVING, HUNGRY, SATED, FULL}
+	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
 	public Hunger hunger;
 	float timeSinceLastMeal;
 
@@ -59,6 +59,7 @@ public class Character : MonoBehaviour {
 	void InitIcon() {
 		SetHP(hp);
 		icon.SetName(gameObject.name);
+		icon.ChangeFace(hunger);
 	}
 
 
@@ -77,12 +78,17 @@ public class Character : MonoBehaviour {
 	void Death () {
 		gm.uIManager.Log(name+" has died !");
 
-		Destroy(icon.gameObject);
+		icon.Death();
 		Destroy(gameObject);
 	}
 
 
 	//HUNGER
+	void SetHunger (Hunger hunger) {
+		this.hunger = hunger;
+		icon.ChangeFace(hunger);
+	}
+
 	public void Eat() {
 		if (hunger == Hunger.FULL) gm.uIManager.Log(name+" is full !"); //Character is not hungry
 		else if (!gm.foodManager.EnoughFood(1)) gm.uIManager.Log("You're out of food !"); //No food left
@@ -90,11 +96,11 @@ public class Character : MonoBehaviour {
 		else { //Eat
 			gm.foodManager.AddFood(-1);
 			AddHP(0.2f);
-			if (hunger == Hunger.HUNGRY || hunger == Hunger.STARVING) hunger = Hunger.SATED;
-			else if (hunger == Hunger.SATED) hunger = Hunger.FULL;
+			if (hunger == Hunger.HUNGRY || hunger == Hunger.STARVING) SetHunger(Hunger.SATED);
+			else if (hunger == Hunger.SATED) SetHunger(Hunger.FULL);
 			timeSinceLastMeal = 0;
 
-			gm.uIManager.Log(name+" fed. food left : "+gm.foodManager.food);
+			gm.uIManager.Log(name+" ate and feels better !");
 		} 
 	}
 
@@ -104,13 +110,13 @@ public class Character : MonoBehaviour {
 		if (hunger!= Hunger.STARVING 
 				&& hunger!= Hunger.HUNGRY 
 				&& timeSinceLastMeal > gm.timeManager.dayDuration * gm.timeManager.daysBeforeHunger) { //character gets hungry after a while 
-			hunger = Hunger.HUNGRY;
+			SetHunger(Hunger.HUNGRY);
 			gm.uIManager.Log(name+" is getting hungry...");
 		}
 
 		if (hunger!= Hunger.STARVING 
 				&& timeSinceLastMeal > gm.timeManager.dayDuration * gm.timeManager.daysBeforeStarving) { //character gets really hungry after a while 
-			hunger = Hunger.STARVING;
+			SetHunger(Hunger.STARVING);
 			gm.uIManager.Log(name+" is getting really hungry...");
 		}
 

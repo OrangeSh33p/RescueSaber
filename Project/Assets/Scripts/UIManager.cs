@@ -8,6 +8,11 @@ public class UIManager : MonoBehaviour {
 	public Text stopoverText;
 	public Transform console;
 	public GameObject logPrefab;
+	public string full;
+	public string sated;
+	public string hungry;
+	public string starving;
+	public string dead;
 
 	private float timeSinceLastLog;
 	private List<string> standbyLogs = new List<string>();
