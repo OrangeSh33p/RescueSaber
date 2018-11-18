@@ -32,11 +32,13 @@ public class Bus : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey(KeyCode.Z)) Faster();
 		if (Input.GetKey(KeyCode.S)) Slower();
+		if (currentSpeed > maxSpeed) Slower();
 		Move();
 
 		if (inStopover) ContinueStopover();
 
 		if (Input.GetKeyDown(KeyCode.K)) Klaxon();
+
 	}
 
 	void Move() {
@@ -64,7 +66,7 @@ public class Bus : MonoBehaviour {
 	}
 
 	void Klaxon () {
-		Debug.Log("POUET");
+		gm.uIManager.Log("HONK");
 
 		//Every character in the stopover or walking towards it evacuates
 		foreach(Character character in Character.characters)

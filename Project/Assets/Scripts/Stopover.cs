@@ -39,7 +39,7 @@ public class Stopover : MonoBehaviour {
 	}
 
 	IEnumerator Fight() {
-		Debug.Log("starting fight...");
+		gm.uIManager.Log("Starting fight...");
 		yield return new WaitForSeconds(2);
 
 		//Keep playing till one of the sides has been defeated
@@ -49,21 +49,22 @@ public class Stopover : MonoBehaviour {
 
 			//Enemy is hit (rolled lower than the amount of characters)
 			if (charactersInvolved.Count >= ran+1) {
-				Debug.Log("Enemy took damage !");
+				gm.uIManager.Log("Enemy took damage !");
 				hpLeft --;
 			} 
 
 			//Character is hit (rolled higher than the amount of characters)
 			else {
 				Character target = charactersInvolved[Random.Range(0, charactersInvolved.Count)];
-				Debug.Log(target.name+" took damage !");
-				target.Damage(0.1f);
+				target.AddHP(-0.1f);
 
 				//If too injured, flee
 				if (Random.value > target.hp) {
-					Debug.Log(target.name+" ran away !");
+					gm.uIManager.Log(target.name+" took damage and ran away !");
 					target.ExitStopover();
 				}
+
+				else gm.uIManager.Log(target.name+" took damage !");
 			} 
 
 			//Wait
@@ -72,11 +73,13 @@ public class Stopover : MonoBehaviour {
 
 		//win
 		if (hpLeft == 0) {
-			Debug.Log("victory!");
+			int foodGained = Random.Range(2, 6);
+			gm.uIManager.Log("Victory! Food gained : "+foodGained);
+			gm.foodManager.AddFood(foodGained);
 		} 
 
 		//loss
-		else Debug.Log("defeat");
+		else gm.uIManager.Log("Retreat !");
 
 		//All characters exit location (decreasing "for" loop because we are removing elements from the list)
 		for (int i=charactersInvolved.Count-1;i>=0;i--) {

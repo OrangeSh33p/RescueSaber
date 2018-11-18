@@ -199,5 +199,5 @@ MonoBehaviour:
   stopoverText: {fileID: 0}
   charactersInvolved: []
   entrance: {fileID: 4273112408702754}
-  hpLeft: 5
+  hpLeft: 3
   characterHolder: {fileID: 4349404378451392}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterIcon : MonoBehaviour {
-	public Character chara;
+	public Character character;
 	public Slider hpBar;
 	public Image hpBarColor;
 	public Text charaName;
@@ -23,5 +23,9 @@ public class CharacterIcon : MonoBehaviour {
 
 	public void Order () {
 		GetComponent<RectTransform>().position = new Vector3(0, (95 + 50*transform.GetSiblingIndex()), 0);
+	}
+
+	public void Clicked () {
+		character.Eat();
 	}
 }
