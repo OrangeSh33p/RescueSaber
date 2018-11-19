@@ -501,6 +501,18 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1293481079609518, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
+      propertyPath: m_Name
+      value: Anita
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838419031297826, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
+      propertyPath: m_Name
+      value: Marc
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336631349173712, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
+      propertyPath: m_Name
+      value: Lucy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
   m_IsPrefabAsset: 0

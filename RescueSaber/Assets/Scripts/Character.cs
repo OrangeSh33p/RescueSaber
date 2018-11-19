@@ -3,32 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
-	//Position
-	public enum Side {LEFT, RIGHT}
-	public Side side;
-	public float rank;
-	public bool driver;
-	public enum State {BUS, STOPOVER, WALKING_TO_STOPOVER, WALKING_TO_BUS}
-	public State state;
+
+	[Header("Balancing")]
+	//Use "name" property of the gameobject for the character's name
 	public float walkSpeed;
-	public Transform visuals;
-	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
+
+	[Header("State")]
+	public float hp; //value is between 0 and 1
+	public State state;
+
+	[Header("Bus Position")]
+	public BusSide side;
+	public float rank;
+
+	[Header("Hunger")]
 	public Hunger hunger;
 	float timeSinceLastMeal;
 
+	[Header("References")]
+	public Transform visuals;
+	public CharacterIcon icon;
+	
+	//Storage
+	private GameManager gm { get { return GameManager.Instance; } }
+	private Bus bus { get { return gm.bus; } }
+	private Vector3 busPos { get { return bus.transform.position; } }
+	private TimeManager timeManager { get { return gm.timeManager; } }
+
+	//Enums
+	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
+	public enum BusSide {LEFT, RIGHT}
+	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
+
+	//Characters list
 	static List<Character> _characters;
 	public static List<Character> characters { 
 		get { if (_characters == null) _characters = new List<Character>(); 
 			return _characters; } }
 
-	//Stats
-	//Use "name" property of the gameobject for the character's name
-	public CharacterIcon icon;
-	public float hp; //value is between 0 and 1
 
-
-	private GameManager gm { get { return GameManager.Instance; } }
-
+	//BASIC METHODS
 	void Start () {
 		characters.Add(this);
 		hp = 1;
@@ -41,10 +55,7 @@ public class Character : MonoBehaviour {
 		if (state == State.WALKING_TO_BUS) WalkToBus (); //keep walking if you were
 		if (state == State.WALKING_TO_STOPOVER) WalkToStopover (); //keep walking if you were
 
-		if (Input.GetKeyDown(KeyCode.W) && transform.GetSiblingIndex() == 2) Death(); // ***** W : kill first character *****
-
-		if (state != State.BUS && Vector3.Distance(transform.position, gm.bus.transform.position) > gm.bus.distanceToAbandonment)
-			Death(); //kill character if too far
+		if (Vector3.Distance(transform.position, bus.transform.position) > bus.distanceToAbandonment) Death(); //kill character if too far
 
 		IncreaseHunger();
 	}
@@ -65,7 +76,7 @@ public class Character : MonoBehaviour {
 
 	//HP
 	public void SetHP (float value) {
-		hp = Mathf.Clamp(value, 0, 1);
+		hp = Mathf.Clamp01(value);
 		icon.SetHP(hp);
 
 		if (hp == 0) Death();
@@ -78,6 +89,7 @@ public class Character : MonoBehaviour {
 	void Death () {
 		gm.uIManager.Log(name+" has died !");
 
+		SetHP(0);
 		icon.Death();
 		Destroy(gameObject);
 	}
@@ -109,50 +121,46 @@ public class Character : MonoBehaviour {
 
 		if (hunger!= Hunger.STARVING 
 				&& hunger!= Hunger.HUNGRY 
-				&& timeSinceLastMeal > gm.timeManager.dayDuration * gm.timeManager.daysBeforeHunger) { //character gets hungry after a while 
+				&& timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeHunger) { //character gets hungry after a while 
 			SetHunger(Hunger.HUNGRY);
 			gm.uIManager.Log(name+" is getting hungry...");
 		}
 
-		if (hunger!= Hunger.STARVING 
-				&& timeSinceLastMeal > gm.timeManager.dayDuration * gm.timeManager.daysBeforeStarving) { //character gets really hungry after a while 
+		else if (hunger!= Hunger.STARVING 
+				&& timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeStarving) { //character gets really hungry after a while 
 			SetHunger(Hunger.STARVING);
 			gm.uIManager.Log(name+" is getting really hungry...");
 		}
 
-		else if (timeSinceLastMeal > gm.timeManager.dayDuration * gm.timeManager.daysBeforeDeath) //character dies after a while
+		else if (timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeDeath) //character dies after a while
 			Death();
 	}
 
 
 	//BUS
 	void WalkToBus () {
-		Vector3 target = gm.bus.transform.position;
-
-		//Walk towards target
-		transform.LookAt(target);
-		transform.position += transform.forward * Time.deltaTime * walkSpeed;
-
-		//If arrived, get in target
-		if (Vector3.Distance(target, transform.position) < 2) GetInBus();
+		transform.LookAt(busPos);
+		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
+		
+		if (Vector3.Distance(busPos, transform.position) < 2) GetInBus(); //If arrived, get in target
 	}
 
 	void GetInBus() {
-		transform.parent = gm.bus.characterHolder;
+		state = State.BUS;
+		transform.parent = bus.characterHolder; //Become child of the bus (stop following the stopover and follow the bus instead)
 
 		Vector3 newPos = new Vector3();
-
-		if (side == Side.LEFT) newPos += Vector3.left * 0.25f;
-		if (side == Side.RIGHT) newPos += Vector3.right * 0.25f;
+		if (side == BusSide.LEFT) newPos += Vector3.left * 0.25f;
+		else if (side == BusSide.RIGHT) newPos += Vector3.right * 0.25f;
 		newPos += Vector3.forward * ((3-rank)*0.5f - 0.75f);
 
-		transform.localPosition = newPos;
-		transform.rotation = Quaternion.identity;
+		transform.localPosition = newPos; //Move to your assigned seat
+		transform.rotation = Quaternion.identity; //Look forward
 	}
 
 	public void ExitBus () {
-		transform.position = gm.bus.busExit.position;
-		transform.parent = gm.stopover.characterHolder;
+		transform.position = bus.busExit.position;
+		transform.parent = gm.stopover.characterHolder; //Become a child of the stopover
 		state = State.WALKING_TO_STOPOVER;
 	}
 
@@ -160,13 +168,11 @@ public class Character : MonoBehaviour {
 	//STOPOVER
 	void WalkToStopover () {
 		Vector3 target = gm.stopover.entrance.position;
-
-		//Walk towards target
+		
 		transform.LookAt(target);
-		transform.position += transform.forward * Time.deltaTime * walkSpeed;
-
-		//If arrived, get in target
-		if (Vector3.Distance(target, transform.position) < 2) GetInStopover();
+		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
+		
+		if (Vector3.Distance(target, transform.position) < 2) GetInStopover(); //If arrived, get in target
 	}
 
 	void GetInStopover () {

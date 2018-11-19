@@ -15,19 +15,16 @@ public class Bus : MonoBehaviour {
 
 	private float currentSpeed;
 
-	[Header("Boring")]
+	[Header("References")]
 	public GameObject LD;
 	public Transform characterHolder;
 	public Transform busExit;
 
-	private GameManager gm { get { return GameManager.Instance; } }
-
 	//Storage
+	private GameManager gm { get { return GameManager.Instance; } }
 	private Ray ray;
 	private RaycastHit hit;
 	private int characterLayerMask = 1 << 9;
-	
-
 
 	void Update () {
 		if (Input.GetKey(KeyCode.Z)) Faster();
@@ -37,7 +34,7 @@ public class Bus : MonoBehaviour {
 
 		if (inStopover) ContinueStopover();
 
-		if (Input.GetKeyDown(KeyCode.K)) Klaxon();
+		if (Input.GetKeyDown(KeyCode.K)) Honk();
 
 	}
 
@@ -65,7 +62,7 @@ public class Bus : MonoBehaviour {
 			inStopover = true;
 	}
 
-	void Klaxon () {
+	void Honk () {
 		gm.uIManager.Log("HONK");
 
 		//Every character in the stopover or walking towards it evacuates
@@ -81,7 +78,7 @@ public class Bus : MonoBehaviour {
 			Character character = hit.collider.GetComponent<Character>();
 
 			//If target is a character (not the driver), add it to the stopover
-			if (character != null && !character.driver) {
+			if (character != null) {
 				character.ExitBus();
 			}
 		}
