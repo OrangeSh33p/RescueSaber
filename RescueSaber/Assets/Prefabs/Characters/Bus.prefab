@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 114764062818120204}
   - component: {fileID: 136053141608006256}
   m_Layer: 9
-  m_Name: Emeline
+  m_Name: Anita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 114876332956374504}
   - component: {fileID: 136104487688729660}
   m_Layer: 9
-  m_Name: "Fr\xE9n\xE9gonde"
+  m_Name: Lucy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,8 +167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4714417728658246}
-  - component: {fileID: 114504835673063584}
-  - component: {fileID: 136389700978145806}
   m_Layer: 9
   m_Name: Driver
   m_TagString: Untagged
@@ -312,7 +310,7 @@ GameObject:
   - component: {fileID: 114745427755936700}
   - component: {fileID: 136511818077121354}
   m_Layer: 9
-  m_Name: Archibald
+  m_Name: Marc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,7 +328,7 @@ Transform:
   m_Children:
   - {fileID: 4531599163494406}
   m_Father: {fileID: 4336537226872600}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4115975630141390
 Transform:
@@ -381,7 +379,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4714417728658246}
   - {fileID: 4977549176157460}
   - {fileID: 4710767124686910}
   - {fileID: 4007918993745498}
@@ -425,6 +422,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4357966508697154}
+  - {fileID: 4714417728658246}
   m_Father: {fileID: 4955962263904642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -468,7 +466,7 @@ Transform:
   m_Children:
   - {fileID: 4787503821970342}
   m_Father: {fileID: 4336537226872600}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4714417728658246
 Transform:
@@ -477,12 +475,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1403521770159256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0.75}
+  m_LocalPosition: {x: -0.25, y: 1.1, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4469886411953462}
-  m_Father: {fileID: 4336537226872600}
-  m_RootOrder: 0
+  m_Father: {fileID: 4439713545802344}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4787503821970342
 Transform:
@@ -568,7 +566,7 @@ Transform:
   m_Children:
   - {fileID: 4874060959702898}
   m_Father: {fileID: 4336537226872600}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4985757657996610
 Transform:
@@ -895,29 +893,14 @@ MonoBehaviour:
   deceleration: 20
   distanceToTriggerStopovers: 10
   distanceToAbandonment: 10
+  leftSeatX: -0.25
+  rightSeatX: 0.25
+  rank0Z: 0.75
+  distanceBetweenRanks: 0.25
   inStopover: 0
   LD: {fileID: 0}
   characterHolder: {fileID: 4336537226872600}
   busExit: {fileID: 4417771187646936}
---- !u!114 &114504835673063584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1403521770159256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  side: 0
-  rank: 0
-  driver: 1
-  state: 0
-  walkSpeed: 1
-  visuals: {fileID: 4469886411953462}
-  icon: {fileID: 0}
-  hp: 0
 --- !u!114 &114745427755936700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -929,14 +912,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 1
+  contactDistance: 2
+  hp: 0
+  state: 0
   side: 1
   rank: 2
-  driver: 0
-  state: 0
-  walkSpeed: 1
+  hunger: 0
   visuals: {fileID: 4787503821970342}
   icon: {fileID: 0}
-  hp: 0
 --- !u!114 &114764062818120204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -948,14 +932,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 1
+  contactDistance: 2
+  hp: 0
+  state: 0
   side: 1
   rank: 0
-  driver: 0
-  state: 0
-  walkSpeed: 1
+  hunger: 0
   visuals: {fileID: 4874060959702898}
   icon: {fileID: 0}
-  hp: 0
 --- !u!114 &114876332956374504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -967,14 +952,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 1
+  contactDistance: 2
+  hp: 0
+  state: 0
   side: 0
   rank: 3
-  driver: 0
-  state: 0
-  walkSpeed: 1
+  hunger: 0
   visuals: {fileID: 4531599163494406}
   icon: {fileID: 0}
-  hp: 0
 --- !u!136 &136053141608006256
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -994,19 +980,6 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336631349173712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!136 &136389700978145806
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1403521770159256}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bus : MonoBehaviour {
-	[Header("Balancing")]
+	[Header("Balancing : Movement")]
 	public float maxSpeed;
 	public float acceleration;
 	public float deceleration;
-	public float distanceToTriggerStopovers;
 	public float distanceToAbandonment;
 
-	[Header("State")]
-	public bool inStopover;
+	[Header("Balancing : Seat positions")]
+	public float leftSeatX;
+	public float rightSeatX;
+	public float rank0Z;
+	public float distanceBetweenRanks;
 
+	[Header("State")]
 	private float currentSpeed;
 
 	[Header("References")]
@@ -32,7 +35,7 @@ public class Bus : MonoBehaviour {
 		if (currentSpeed > maxSpeed) Slower();
 		Move();
 
-		if (inStopover) ContinueStopover();
+		if (gm.stopover != null) ContinueStopover();
 
 		if (Input.GetKeyDown(KeyCode.K)) Honk();
 
@@ -54,12 +57,6 @@ public class Bus : MonoBehaviour {
 			currentSpeed = Mathf.Max (currentSpeed - deceleration*Time.deltaTime, 0);
 			gm.cameraManager.Slower();
 		}
-
-		//if speed is null and stopover is close, start the stopover event
-		if (currentSpeed == 0 
-				&& gm.stopover 
-				&& Vector3.Distance(gm.stopover.transform.position, transform.position) < distanceToTriggerStopovers)
-			inStopover = true;
 	}
 
 	void Honk () {

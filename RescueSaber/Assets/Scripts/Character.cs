@@ -7,6 +7,7 @@ public class Character : MonoBehaviour {
 	[Header("Balancing")]
 	//Use "name" property of the gameobject for the character's name
 	public float walkSpeed;
+	public float contactDistance; //distance past which you are considered in contact with an object
 
 	[Header("State")]
 	public float hp; //value is between 0 and 1
@@ -142,7 +143,7 @@ public class Character : MonoBehaviour {
 		transform.LookAt(busPos);
 		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
 		
-		if (Vector3.Distance(busPos, transform.position) < 2) GetInBus(); //If arrived, get in target
+		if (Vector3.Distance(busPos, transform.position) < contactDistance) GetInBus(); //If arrived, get in target
 	}
 
 	void GetInBus() {
@@ -150,9 +151,9 @@ public class Character : MonoBehaviour {
 		transform.parent = bus.characterHolder; //Become child of the bus (stop following the stopover and follow the bus instead)
 
 		Vector3 newPos = new Vector3();
-		if (side == BusSide.LEFT) newPos += Vector3.left * 0.25f;
-		else if (side == BusSide.RIGHT) newPos += Vector3.right * 0.25f;
-		newPos += Vector3.forward * ((3-rank)*0.5f - 0.75f);
+		if (side == BusSide.LEFT) newPos += Vector3.right * bus.leftSeatX;
+		else if (side == BusSide.RIGHT) newPos += Vector3.right * bus.rightSeatX;
+		newPos += Vector3.forward * (bus.rank0Z - rank*bus.distanceBetweenRanks);
 
 		transform.localPosition = newPos; //Move to your assigned seat
 		transform.rotation = Quaternion.identity; //Look forward
@@ -172,7 +173,7 @@ public class Character : MonoBehaviour {
 		transform.LookAt(target);
 		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
 		
-		if (Vector3.Distance(target, transform.position) < 2) GetInStopover(); //If arrived, get in target
+		if (Vector3.Distance(target, transform.position) < contactDistance) GetInStopover(); //If arrived, get in target
 	}
 
 	void GetInStopover () {

@@ -16,6 +16,7 @@ public class Stopover : MonoBehaviour {
 		stopoverSign = gm.uIManager.stopoverSign;
 		stopoverText = gm.uIManager.stopoverText;
 		stopoverSign.SetActive(true);
+		gm.stopover = this;
 	}
 
 	void Update () {

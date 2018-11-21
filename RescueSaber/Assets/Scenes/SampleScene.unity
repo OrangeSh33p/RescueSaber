@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657922, g: 0.49641544, b: 0.5748184, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641508, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,7 +148,7 @@ Transform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114764062818120204, guid: 9c4dcfa632737be448a47aa962eb3f0a,
     type: 2}
-  m_PrefabInternal: {fileID: 682504501}
+  m_PrefabInternal: {fileID: 643855351}
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
 --- !u!4 &215970243 stripped
 Transform:
@@ -418,13 +418,13 @@ Prefab:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114876332956374504, guid: 9c4dcfa632737be448a47aa962eb3f0a,
     type: 2}
-  m_PrefabInternal: {fileID: 682504501}
+  m_PrefabInternal: {fileID: 643855351}
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
 --- !u!114 &602478248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114745427755936700, guid: 9c4dcfa632737be448a47aa962eb3f0a,
     type: 2}
-  m_PrefabInternal: {fileID: 682504501}
+  m_PrefabInternal: {fileID: 643855351}
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
 --- !u!114 &628223688 stripped
 MonoBehaviour:
@@ -432,7 +432,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 559856628}
   m_Script: {fileID: 11500000, guid: f3f228c6322c10349a3126b825a86e28, type: 3}
---- !u!1001 &682504501
+--- !u!1001 &643855351
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -486,33 +486,11 @@ Prefab:
       propertyPath: icon
       value: 
       objectReference: {fileID: 1363419927}
-    - target: {fileID: 114504835673063584, guid: 9c4dcfa632737be448a47aa962eb3f0a,
-        type: 2}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114244604247954620, guid: 9c4dcfa632737be448a47aa962eb3f0a,
         type: 2}
       propertyPath: LD
       value: 
       objectReference: {fileID: 45013789}
-    - target: {fileID: 114504835673063584, guid: 9c4dcfa632737be448a47aa962eb3f0a,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1293481079609518, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
-      propertyPath: m_Name
-      value: Anita
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838419031297826, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
-      propertyPath: m_Name
-      value: Marc
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336631349173712, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
-      propertyPath: m_Name
-      value: Lucy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
   m_IsPrefabAsset: 0
@@ -566,7 +544,7 @@ Prefab:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114244604247954620, guid: 9c4dcfa632737be448a47aa962eb3f0a,
     type: 2}
-  m_PrefabInternal: {fileID: 682504501}
+  m_PrefabInternal: {fileID: 643855351}
   m_Script: {fileID: 11500000, guid: 8f3a15418aaac9d4789638ad9ec3c21e, type: 3}
 --- !u!1 &934027006
 GameObject:

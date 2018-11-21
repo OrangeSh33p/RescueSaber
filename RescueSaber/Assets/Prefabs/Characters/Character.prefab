@@ -154,14 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 1
+  contactDistance: 2
+  hp: 0
+  state: 0
   side: 0
   rank: 0
-  driver: 0
-  state: 0
-  walkSpeed: 0
+  hunger: 0
   visuals: {fileID: 0}
   icon: {fileID: 0}
-  hp: 0
 --- !u!136 &136238971631615708
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -28,8 +28,6 @@ public class ChunkManager : MonoBehaviour {
 				Quaternion.identity,
 				chunk.transform)
 				.GetComponent<Stopover>();
-			
-			gm.stopover = stopover;
 		}
 	}
 }
