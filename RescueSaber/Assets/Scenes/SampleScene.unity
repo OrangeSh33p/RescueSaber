@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641508, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657922, g: 0.49641544, b: 0.5748184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -619,16 +619,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: sunLight.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: dayDuration.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -661,11 +651,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
+    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
-      propertyPath: sunLight
+      propertyPath: foodIcon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1606789286}
     - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
       propertyPath: bus
@@ -686,56 +676,6 @@ Prefab:
       propertyPath: uIManager
       value: 
       objectReference: {fileID: 1541186995}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: sunLight.Array.data[0]
-      value: 
-      objectReference: {fileID: 934027007}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: sunLight.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: dayDuration
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: dayDuration.Array.data[0]
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: dayDuration.Array.data[1]
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: daysBeforeHunger
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: daysBeforeDeath
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: food
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: foodIcon
-      value: 
-      objectReference: {fileID: 1606789286}
-    - target: {fileID: 114233441222912664, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: daysBeforeStarving
-      value: 0.75
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
   m_IsPrefabAsset: 0

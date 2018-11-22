@@ -31,6 +31,7 @@ public class Character : MonoBehaviour {
 	private Vector3 busPos { get { return bus.transform.position; } }
 	private TimeManager timeManager { get { return gm.timeManager; } }
 	private Stopover stopover { get { return gm.stopover; } }
+	private UIManager ui { get { return gm.uIManager; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
@@ -57,13 +58,14 @@ public class Character : MonoBehaviour {
 		if (state == State.WALKING_TO_BUS) WalkToBus (); //keep walking if you were
 		if (state == State.WALKING_TO_STOPOVER) WalkToStopover (); //keep walking if you were
 
-		if (Vector3.Distance(transform.position, bus.transform.position) > bus.InfluenceZone) Death(); //kill character if too far
+		if (Vector3.Distance(transform.position, bus.transform.position) > bus.InfluenceZone) Death("You have left "+name+" to die on the road..."); //kill character if too far
 
 		IncreaseHunger();
 	}
 
 	void OnDestroy () {
 		characters.Remove(this);
+		stopover.charactersInvolved.Remove(this);
 		if (characters.Count == 0) gm.Defeat();
 	}
 
@@ -81,15 +83,19 @@ public class Character : MonoBehaviour {
 		hp = Mathf.Clamp01(value);
 		icon.SetHP(hp);
 
-		if (hp == 0) Death();
+		if (hp == 0) Death(name+" died because of their many injuries...");
 	}
 
 	public void AddHP (float value) {
 		SetHP(hp + value);
 	}
 
-	void Death () {
-		gm.uIManager.Log(name+" has died !");
+	public void Damage (float value) {
+		SetHP(hp - value);
+	}
+
+	void Death (string message) {
+		ui.Log(message);
 
 		icon.SetHP(0);
 		icon.Death();
@@ -104,17 +110,21 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Eat() {
-		if (hunger == Hunger.FULL) gm.uIManager.Log(name+" is full !"); //Character is not hungry
-		else if (!gm.foodManager.EnoughFood(1)) gm.uIManager.Log("You're out of food !"); //No food left
+		if (hunger == Hunger.FULL) ui.Log(name+" is full !"); //Character is not hungry
+		else if (!gm.foodManager.EnoughFood(1)) ui.Log("You're out of food !"); //No food left
+		else if (state != State.BUS) ui.Log(name+" can't eat outside the bus"); //Cant eat outside the bus
 
 		else { //Eat
-			gm.foodManager.AddFood(-1);
-			AddHP(0.2f);
-			if (hunger == Hunger.HUNGRY || hunger == Hunger.STARVING) SetHunger(Hunger.SATED);
+			gm.foodManager.AddFood(-1); //Subtract food from stocks
+
+			if (hunger == Hunger.HUNGRY || hunger == Hunger.STARVING) SetHunger(Hunger.SATED); //Change hunger status
 			else if (hunger == Hunger.SATED) SetHunger(Hunger.FULL);
 			timeSinceLastMeal = 0;
 
-			gm.uIManager.Log(name+" ate and feels better !");
+			float regenAmount = Random.Range(gm.foodManager.minHpRegen, gm.foodManager.maxHpRegen); //Add hp
+			AddHP(regenAmount);
+
+			ui.Log(name+" ate and regained "+(int)(regenAmount*100)+" hp !");
 		} 
 	}
 
@@ -125,17 +135,17 @@ public class Character : MonoBehaviour {
 				&& hunger!= Hunger.HUNGRY 
 				&& timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeHunger) { //character gets hungry after a while 
 			SetHunger(Hunger.HUNGRY);
-			gm.uIManager.Log(name+" is getting hungry...");
+			ui.Log(name+" is getting hungry...");
 		}
 
 		else if (hunger!= Hunger.STARVING 
 				&& timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeStarving) { //character gets really hungry after a while 
 			SetHunger(Hunger.STARVING);
-			gm.uIManager.Log(name+" is getting really hungry...");
+			ui.Log(name+" is getting really hungry...");
 		}
 
 		else if (timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeDeath) //character dies after a while
-			Death();
+			Death(name+" starved to death !");
 	}
 
 

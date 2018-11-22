@@ -5,6 +5,8 @@ using UnityEngine;
 public class FoodManager : MonoSingleton<FoodManager>{
 	public FoodIcon foodIcon;
 	public float food;
+	public float minHpRegen;
+	public float maxHpRegen;
 
 	private Ray ray;
 	private RaycastHit hit;
@@ -30,6 +32,6 @@ public class FoodManager : MonoSingleton<FoodManager>{
 	}
 
 	public bool EnoughFood (float value) {
-		return (food >= value);
+		return food >= value;
 	}
 }

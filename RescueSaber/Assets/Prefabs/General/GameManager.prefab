@@ -160,7 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22e7c3a0cc5fd34296a41789fa06422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sunLight: {fileID: 0}
+  dayDuration: 60
+  daysBeforeHunger: 0.5
+  daysBeforeStarving: 0.75
+  daysBeforeDeath: 1
 --- !u!114 &114474570686744004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,4 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9193890578405458a348650da1a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: 10
+  foodIcon: {fileID: 0}
+  food: 5
+  minHpRegen: 0.05
+  maxHpRegen: 0.15

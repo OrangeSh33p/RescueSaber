@@ -891,7 +891,7 @@ MonoBehaviour:
   maxSpeed: 20
   acceleration: 4
   deceleration: 20
-  distanceToAbandonment: 10
+  InfluenceZone: 20
   leftSeatX: -0.25
   rightSeatX: 0.25
   rank0Z: 0.75
@@ -912,13 +912,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
-  hp: 0
-  state: 0
   side: 1
   rank: 2
-  hunger: 0
   visuals: {fileID: 4787503821970342}
   icon: {fileID: 0}
+  hp: 1
+  state: 0
+  hunger: 0
 --- !u!114 &114764062818120204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -932,13 +932,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
-  hp: 0
-  state: 0
   side: 1
   rank: 0
-  hunger: 0
   visuals: {fileID: 4874060959702898}
   icon: {fileID: 0}
+  hp: 1
+  state: 0
+  hunger: 0
 --- !u!114 &114876332956374504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -952,13 +952,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
-  hp: 0
-  state: 0
   side: 0
   rank: 3
-  hunger: 0
   visuals: {fileID: 4531599163494406}
   icon: {fileID: 0}
+  hp: 1
+  state: 0
+  hunger: 0
 --- !u!136 &136053141608006256
 CapsuleCollider:
   m_ObjectHideFlags: 1
