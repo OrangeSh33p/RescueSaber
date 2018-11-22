@@ -21,13 +21,11 @@ public class ChunkManager : MonoBehaviour {
 				transform
 			).GetComponent<Chunk>();
 
-		if (gm.stopover == null && Random.value < 0.1f) {
-			Stopover stopover = Instantiate(
+		if (gm.stopover == null && Random.value < 0.1f)
+			Instantiate(
 				stopoverPrefabs[Random.Range(0,stopoverPrefabs.Length-1)],
 				chunk.transform.position,
 				Quaternion.identity,
-				chunk.transform)
-				.GetComponent<Stopover>();
-		}
+				chunk.transform);
 	}
 }

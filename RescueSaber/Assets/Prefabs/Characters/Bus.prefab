@@ -891,13 +891,11 @@ MonoBehaviour:
   maxSpeed: 20
   acceleration: 4
   deceleration: 20
-  distanceToTriggerStopovers: 10
   distanceToAbandonment: 10
   leftSeatX: -0.25
   rightSeatX: 0.25
   rank0Z: 0.75
-  distanceBetweenRanks: 0.25
-  inStopover: 0
+  distanceBetweenRanks: 0.5
   LD: {fileID: 0}
   characterHolder: {fileID: 4336537226872600}
   busExit: {fileID: 4417771187646936}

@@ -7,7 +7,7 @@ public class Bus : MonoBehaviour {
 	public float maxSpeed;
 	public float acceleration;
 	public float deceleration;
-	public float distanceToAbandonment;
+	public float InfluenceZone;
 
 	[Header("Balancing : Seat positions")]
 	public float leftSeatX;
@@ -15,13 +15,13 @@ public class Bus : MonoBehaviour {
 	public float rank0Z;
 	public float distanceBetweenRanks;
 
-	[Header("State")]
-	private float currentSpeed;
-
 	[Header("References")]
 	public GameObject LD;
 	public Transform characterHolder;
 	public Transform busExit;
+
+	[Header("State")]
+	private float currentSpeed;
 
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
@@ -35,7 +35,9 @@ public class Bus : MonoBehaviour {
 		if (currentSpeed > maxSpeed) Slower();
 		Move();
 
-		if (gm.stopover != null) ContinueStopover();
+		//If close to a stopover, be ready to get player input
+		if (gm.stopover != null && Vector3.Distance(transform.position, gm.stopover.transform.position) < InfluenceZone) 
+			ContinueStopover();
 
 		if (Input.GetKeyDown(KeyCode.K)) Honk();
 
@@ -74,11 +76,8 @@ public class Bus : MonoBehaviour {
 		if (Input.GetMouseButtonUp(0) && Physics.Raycast (ray, out hit, Mathf.Infinity, characterLayerMask)) {
 			Character character = hit.collider.GetComponent<Character>();
 
-			//If target is a character (not the driver), add it to the stopover
-			if (character != null) {
-				character.ExitBus();
-			}
+			//If target is a character, add it to the stopover
+			if (character != null) character.ExitBus();
 		}
-
 	}
 }

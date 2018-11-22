@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-	[Header("Balancing")]
+	[Header("Balancing : General")]
 	//Use "name" property of the gameobject for the character's name
 	public float walkSpeed;
 	public float contactDistance; //distance past which you are considered in contact with an object
 
-	[Header("State")]
-	public float hp; //value is between 0 and 1
-	public State state;
-
-	[Header("Bus Position")]
+	[Header("Balancing : Bus Position")]
 	public BusSide side;
 	public float rank;
-
-	[Header("Hunger")]
-	public Hunger hunger;
-	float timeSinceLastMeal;
 
 	[Header("References")]
 	public Transform visuals;
 	public CharacterIcon icon;
+
+	[Header("State : General")]
+	public float hp; //value is between 0 and 1
+	public State state;
+
+	[Header("State : Hunger")]
+	public Hunger hunger;
+	float timeSinceLastMeal;
 	
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
 	private Bus bus { get { return gm.bus; } }
 	private Vector3 busPos { get { return bus.transform.position; } }
 	private TimeManager timeManager { get { return gm.timeManager; } }
+	private Stopover stopover { get { return gm.stopover; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
@@ -56,7 +57,7 @@ public class Character : MonoBehaviour {
 		if (state == State.WALKING_TO_BUS) WalkToBus (); //keep walking if you were
 		if (state == State.WALKING_TO_STOPOVER) WalkToStopover (); //keep walking if you were
 
-		if (Vector3.Distance(transform.position, bus.transform.position) > bus.distanceToAbandonment) Death(); //kill character if too far
+		if (Vector3.Distance(transform.position, bus.transform.position) > bus.InfluenceZone) Death(); //kill character if too far
 
 		IncreaseHunger();
 	}
@@ -90,7 +91,7 @@ public class Character : MonoBehaviour {
 	void Death () {
 		gm.uIManager.Log(name+" has died !");
 
-		SetHP(0);
+		icon.SetHP(0);
 		icon.Death();
 		Destroy(gameObject);
 	}
@@ -161,14 +162,14 @@ public class Character : MonoBehaviour {
 
 	public void ExitBus () {
 		transform.position = bus.busExit.position;
-		transform.parent = gm.stopover.characterHolder; //Become a child of the stopover
+		transform.parent = stopover.characterHolder; //Become a child of the stopover
 		state = State.WALKING_TO_STOPOVER;
 	}
 
 
 	//STOPOVER
 	void WalkToStopover () {
-		Vector3 target = gm.stopover.entrance.position;
+		Vector3 target = stopover.entrance.position;
 		
 		transform.LookAt(target);
 		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
@@ -178,14 +179,13 @@ public class Character : MonoBehaviour {
 
 	void GetInStopover () {
 			state = State.STOPOVER;
-			visuals.gameObject.SetActive(false);
-			gm.stopover.charactersInvolved.Add(this);
-			gm.stopover.CheckEvent();
+			visuals.gameObject.SetActive(false); //become invisible
+			stopover.Enter(this);
 	}
 
 	public void ExitStopover () {
 			state = State.WALKING_TO_BUS;
-			visuals.gameObject.SetActive(true);
-			gm.stopover.charactersInvolved.Remove(this);
+			visuals.gameObject.SetActive(true); //become visible
+			stopover.Exit(this);
 	}
 }

@@ -195,9 +195,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3661997a09fd7a444a0b883f1e9994ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopoverSign: {fileID: 0}
-  stopoverText: {fileID: 0}
-  charactersInvolved: []
   entrance: {fileID: 4273112408702754}
-  hpLeft: 3
+  distanceToShowText: 50
+  distanceToShowSecondText: 20
+  distanceToHideText: 10
+  roundDuration: 1
+  amountOfEnemies: 2
+  damage: 0.1
+  hp: 3
+  minFood: 2
+  maxFood: 5
+  charactersInvolved: []
   characterHolder: {fileID: 4349404378451392}
