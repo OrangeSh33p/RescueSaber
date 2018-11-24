@@ -3,25 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour {
-	public Material[] materials;
-	public GameObject ground;
+	[Header("References")]
+	public MeshRenderer visuals;
 
+	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
-	private ChunkManager chunkManager { get { return gm.chunkManager; } }
+	private LevelManager levelManager { get { return gm.levelManager; } }
+
+	//Chunks list
+	static List<Chunk> _chunks;
+	public static List<Chunk> chunks { 
+		get { if (_chunks == null) _chunks = new List<Chunk>(); 
+			return _chunks; } }
 
 	void Start () {
-		ground.GetComponent<MeshRenderer>().material = materials[Random.Range(0,materials.Length)];
-		chunkManager.chunks.Add(this);
+		chunks.Add(this);
 	}
 
 	void Update () {
-		if (transform.position.z < -30) {
-			chunkManager.CreateChunk(transform.position);
-			Destroy(gameObject);
-		}
+		Move();
+		CheckDestroy();
 	}
 
 	void OnDestroy () {
-		chunkManager.chunks.Remove(this);
+		chunks.Remove(this);
+	}
+
+	void Move () {
+		transform.position += new Vector3 (0, 0, -gm.bus.currentSpeed * Time.deltaTime);
+	}
+
+	void CheckDestroy() {
+		if (transform.position.z < levelManager.destroyPosition) {
+			levelManager.CreateChunk(transform.position);
+			Destroy(gameObject);
+		}
 	}
 }

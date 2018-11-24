@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoSingleton<CameraManager> {
+	[Header("Balancing")]
 	public float accelMagnitude;
 	public float decelMagnitude;
 	public float returnMagnitude;
 
-	Vector3 origin;
+	private Vector3 origin;
 
 	void Start () {
 		origin = transform.position;
 	}
 
 	void Update () {
-		transform.position += (origin - transform.position)*Time.deltaTime;
+		transform.position += (origin - transform.position)*Time.deltaTime*returnMagnitude;
 	}
 
 	public void Faster () {

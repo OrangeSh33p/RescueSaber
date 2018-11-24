@@ -21,7 +21,7 @@ public class Bus : MonoBehaviour {
 	public Transform busExit;
 
 	[Header("State")]
-	private float currentSpeed;
+	public float currentSpeed; //Chunks move backward at that speed to give the impression of movement
 
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
@@ -33,7 +33,6 @@ public class Bus : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Z)) Faster();
 		if (Input.GetKey(KeyCode.S)) Slower();
 		if (currentSpeed > maxSpeed) Slower();
-		Move();
 
 		//If close to a stopover, be ready to get player input
 		if (gm.stopover != null && Vector3.Distance(transform.position, gm.stopover.transform.position) < InfluenceZone) 
@@ -41,10 +40,6 @@ public class Bus : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.K)) Honk();
 
-	}
-
-	void Move() {
-		LD.transform.position += new Vector3 (0, 0, -currentSpeed*Time.deltaTime);
 	}
 
 	void Faster() {

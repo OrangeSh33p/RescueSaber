@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodManager : MonoSingleton<FoodManager>{
-	public FoodIcon foodIcon;
-	public float food;
+public class FoodManager : MonoSingleton<FoodManager> {
+	[Header("Balancing")]
 	public float minHpRegen;
 	public float maxHpRegen;
+	public int startFood;
 
-	private Ray ray;
-	private RaycastHit hit;
-	private int characterIconLayerMask = 1 << 10;
+	[Header("References")]
+	public FoodIcon foodIcon;
 
-	void Update() {
-		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		if (Input.GetMouseButtonUp(0) && Physics.Raycast (ray, out hit, Mathf.Infinity, characterIconLayerMask)) {
-			Debug.Log("hit "+hit.collider.name);
-		}
-	} 
+	//State
+	private int food;
 
-	public void SetFood (float value) {
+	void Start () {
+		SetFood(startFood);
+	}
+
+	public void SetFood (int value) {
 		foodIcon.SetFood(value);
 		food = value;
 	}
 
-	public void AddFood (float value) {
-		float newFood = Mathf.Max(food+value, 0);
+	public void AddFood (int value) {
+		SetFood(Mathf.Max(food + value, 0));
+	}
 
-		foodIcon.SetFood(newFood);
-		food = newFood;
+	public void RemoveFood (int value) {
+		SetFood(Mathf.Max(food - value, 0));
 	}
 
 	public bool EnoughFood (float value) {

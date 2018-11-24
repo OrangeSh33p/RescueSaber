@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LogText : MonoBehaviour {
+	[Header("Balancing")]
 	public float timeToDestruction;
 	public float speed;
-	public bool permanent;
+
+	//State
+	private bool permanent;
 
 	void Update () {
-		timeToDestruction -= Time.deltaTime;
+		Move ();
+		if (!permanent) CheckDestroy();
+	}
 
+	void Move() {
 		transform.position += new Vector3(0, Time.deltaTime * speed, 0);
+	}
 
-		if (timeToDestruction < 0 && !permanent) Destroy(gameObject);
+	void CheckDestroy () {
+		timeToDestruction -= Time.deltaTime;
+		if (timeToDestruction < 0) Destroy(gameObject);
+	}
+
+	public void MakePermanent () {
+		permanent = true;
 	}
 }

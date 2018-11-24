@@ -9,10 +9,6 @@ public class Character : MonoBehaviour {
 	public float walkSpeed;
 	public float contactDistance; //distance past which you are considered in contact with an object
 
-	[Header("Balancing : Bus Position")]
-	public BusSide side;
-	public float rank;
-
 	[Header("References")]
 	public Transform visuals;
 	public CharacterIcon icon;
@@ -24,14 +20,19 @@ public class Character : MonoBehaviour {
 	[Header("State : Hunger")]
 	public Hunger hunger;
 	float timeSinceLastMeal;
+
+	[Header("State : Bus Position")]
+	public BusSide side;
+	public float rank;
 	
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
-	private Bus bus { get { return gm.bus; } }
-	private Vector3 busPos { get { return bus.transform.position; } }
-	private TimeManager timeManager { get { return gm.timeManager; } }
-	private Stopover stopover { get { return gm.stopover; } }
-	private UIManager ui { get { return gm.uIManager; } }
+		private Bus bus { get { return gm.bus; } }
+			private Vector3 busPos { get { return bus.transform.position; } }
+		private FoodManager food { get { return gm.foodManager; } }
+		private Stopover stopover { get { return gm.stopover; } }
+		private TimeManager timeManager { get { return gm.timeManager; } }
+		private UIManager ui { get { return gm.uIManager; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
@@ -58,14 +59,15 @@ public class Character : MonoBehaviour {
 		if (state == State.WALKING_TO_BUS) WalkToBus (); //keep walking if you were
 		if (state == State.WALKING_TO_STOPOVER) WalkToStopover (); //keep walking if you were
 
-		if (Vector3.Distance(transform.position, bus.transform.position) > bus.InfluenceZone) Death("You have left "+name+" to die on the road..."); //kill character if too far
+		if (Vector3.Distance(transform.position, bus.transform.position) > bus.InfluenceZone) 
+			Death("You have left "+name+" to die on the road..."); //kill character if too far
 
 		IncreaseHunger();
 	}
 
 	void OnDestroy () {
 		characters.Remove(this);
-		stopover.charactersInvolved.Remove(this);
+		if (stopover) stopover.charactersInvolved.Remove(this);
 		if (characters.Count == 0) gm.Defeat();
 	}
 
@@ -83,7 +85,7 @@ public class Character : MonoBehaviour {
 		hp = Mathf.Clamp01(value);
 		icon.SetHP(hp);
 
-		if (hp == 0) Death(name+" died because of their many injuries...");
+		if (hp == 0) Death(name+" died of their many injuries...");
 	}
 
 	public void AddHP (float value) {
@@ -111,17 +113,17 @@ public class Character : MonoBehaviour {
 
 	public void Eat() {
 		if (hunger == Hunger.FULL) ui.Log(name+" is full !"); //Character is not hungry
-		else if (!gm.foodManager.EnoughFood(1)) ui.Log("You're out of food !"); //No food left
+		else if (!food.EnoughFood(1)) ui.Log("You're out of food !"); //No food left
 		else if (state != State.BUS) ui.Log(name+" can't eat outside the bus"); //Cant eat outside the bus
 
 		else { //Eat
-			gm.foodManager.AddFood(-1); //Subtract food from stocks
+			food.RemoveFood(1); //Subtract food from stocks
 
 			if (hunger == Hunger.HUNGRY || hunger == Hunger.STARVING) SetHunger(Hunger.SATED); //Change hunger status
 			else if (hunger == Hunger.SATED) SetHunger(Hunger.FULL);
 			timeSinceLastMeal = 0;
 
-			float regenAmount = Random.Range(gm.foodManager.minHpRegen, gm.foodManager.maxHpRegen); //Add hp
+			float regenAmount = Random.Range(food.minHpRegen, food.maxHpRegen); //Add hp
 			AddHP(regenAmount);
 
 			ui.Log(name+" ate and regained "+(int)(regenAmount*100)+" hp !");
@@ -145,7 +147,7 @@ public class Character : MonoBehaviour {
 		}
 
 		else if (timeSinceLastMeal > timeManager.dayDuration * timeManager.daysBeforeDeath) //character dies after a while
-			Death(name+" starved to death !");
+			Death(name+" has starved to death !");
 	}
 
 
@@ -159,12 +161,12 @@ public class Character : MonoBehaviour {
 
 	void GetInBus() {
 		state = State.BUS;
-		transform.parent = bus.characterHolder; //Become child of the bus (stop following the stopover and follow the bus instead)
+		transform.parent = bus.characterHolder; //Become child of the bus
 
-		Vector3 newPos = new Vector3();
+		Vector3 newPos = new Vector3(); //Calculate right position inside bus
 		if (side == BusSide.LEFT) newPos += Vector3.right * bus.leftSeatX;
 		else if (side == BusSide.RIGHT) newPos += Vector3.right * bus.rightSeatX;
-		newPos += Vector3.forward * (bus.rank0Z - rank*bus.distanceBetweenRanks);
+		newPos += Vector3.forward * (bus.rank0Z - rank * bus.distanceBetweenRanks);
 
 		transform.localPosition = newPos; //Move to your assigned seat
 		transform.rotation = Quaternion.identity; //Look forward

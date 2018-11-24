@@ -667,10 +667,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224925033009520902}
+  - component: {fileID: 114646630748716006}
   - component: {fileID: 223847862648749984}
   - component: {fileID: 114299963492246126}
   - component: {fileID: 114758435134964740}
-  - component: {fileID: 114646630748716006}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -897,7 +897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDestruction: 2
   speed: 20
-  permanent: 0
 --- !u!114 &114125608743941318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -924,8 +923,8 @@ MonoBehaviour:
   character: {fileID: 0}
   hpBar: {fileID: 114382381734837256}
   hpBarColor: {fileID: 114243147173120712}
-  charaName: {fileID: 114405173097916080}
   face: {fileID: 114308191102370730}
+  charaName: {fileID: 114405173097916080}
 --- !u!114 &114233100319766398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1022,7 +1021,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1033,7 +1032,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: :)
+  m_Text: "(\uFF61\u25D5\u203F\u25D5\uFF61)"
 --- !u!114 &114313295430869488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1136,7 +1135,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1147,7 +1146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: :)
+  m_Text: "(\uFF61\u25D5\u203F\u25D5\uFF61)"
 --- !u!114 &114382381734837256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1380,8 +1379,8 @@ MonoBehaviour:
   character: {fileID: 0}
   hpBar: {fileID: 114605105713304136}
   hpBarColor: {fileID: 114022330965129388}
-  charaName: {fileID: 114920281443303656}
   face: {fileID: 114573313629570838}
+  charaName: {fileID: 114920281443303656}
 --- !u!114 &114509150679644412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1457,7 +1456,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1468,7 +1467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: :)
+  m_Text: "(\uFF61\u25D5\u203F\u25D5\uFF61)"
 --- !u!114 &114605105713304136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1531,8 +1530,8 @@ MonoBehaviour:
   character: {fileID: 0}
   hpBar: {fileID: 114404765489643194}
   hpBarColor: {fileID: 114000269486408066}
-  charaName: {fileID: 114391280726019010}
   face: {fileID: 114339697202038706}
+  charaName: {fileID: 114391280726019010}
 --- !u!114 &114629315205822178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1589,15 +1588,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c922dba391ce09d478e491f08c2bb5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minTimeBetweenLogs: 0
+  fullFace: "\uFF61\u25D5\u203F\u203F\u25D5\uFF61"
+  satedFace: "\uFF61\u25D5\u203F\u25D5\uFF61"
+  hungryFace: "\u0CA0_\u0CA0"
+  starvingFace: "\u0CA5_\u0CA5"
+  deadFace: X.X
   stopoverSign: {fileID: 1535009705088694}
   stopoverText: {fileID: 114646533036135746}
   console: {fileID: 224123086972312292}
   logPrefab: {fileID: 1629229699935880, guid: 27468f1ff8d53b04c8b9bdef3e7e3b7c, type: 2}
-  full: "\uFF61\u25D5\u203F\u203F\u25D5\uFF61"
-  sated: "(\uFF61\u25D5\u203F\u25D5\uFF61)"
-  hungry: "\u0CA0\u256D\u256E\u0CA0"
-  starving: "(\u0CA5\uFE4F\u0CA5)"
-  dead: X . X
 --- !u!114 &114661722813663548
 MonoBehaviour:
   m_ObjectHideFlags: 1

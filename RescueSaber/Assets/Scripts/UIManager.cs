@@ -4,54 +4,69 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+	[Header("Balancing")]
+	public float minTimeBetweenLogs;
+	public string fullFace;
+	public string satedFace;
+	public string hungryFace;
+	public string starvingFace;
+	public string deadFace;
+
+	[Header("References")]
 	public GameObject stopoverSign;
 	public Text stopoverText;
 	public Transform console;
 	public GameObject logPrefab;
-	public string full;
-	public string sated;
-	public string hungry;
-	public string starving;
-	public string dead;
 
+	//State
 	private float timeSinceLastLog;
 	private List<string> standbyLogs = new List<string>();
 	private List<string> permanentStandbyLogs = new List<string>();
 
 	void Update () {
-		timeSinceLastLog += Time.deltaTime;
-		if (timeSinceLastLog > 1 && standbyLogs.Count > 0) {
-			Log(standbyLogs[0]);
-			standbyLogs.RemoveAt(0);
-		}
-
-		if (timeSinceLastLog > 1 && permanentStandbyLogs.Count > 0) {
-			LogPermanent(permanentStandbyLogs[0]);
-			permanentStandbyLogs.RemoveAt(0);
-		}
+		CheckStandbyLogs();
 	}
 
-	public Text Log (string logText) {
-		if (timeSinceLastLog > 1) {
-			Text log = Instantiate (
+	//LOGS
+	void CheckStandbyLogs () {
+		timeSinceLastLog += Time.deltaTime;
+
+		if (timeSinceLastLog > minTimeBetweenLogs) { //If it is time to send a new log
+			if (standbyLogs.Count > 0) { //If there is a standby log, send it
+				Log(standbyLogs[0]);
+				standbyLogs.RemoveAt(0);
+			}
+
+			else if (permanentStandbyLogs.Count > 0) { //If there is a permanent standby log, send it
+				LogPermanent(permanentStandbyLogs[0]);
+				permanentStandbyLogs.RemoveAt(0);
+			}
+		}
+
+	}
+
+	LogText CreateLogText (string logText) {
+			GameObject log = Instantiate (
 				logPrefab, 
 				console.position, 
 				Quaternion.identity, 
 				console
-				).GetComponent<Text>();
+				);
 			
-			log.text = logText;
+			log.GetComponent<Text>().text = logText;
 			timeSinceLastLog = 0;
-			return log;
 
-		} else standbyLogs.Add(logText);
+			return log.GetComponent<LogText>();
+		
+	}
 
-		return null;
+	public void Log (string logText) {
+		if (timeSinceLastLog > minTimeBetweenLogs) CreateLogText(logText);
+		else standbyLogs.Add(logText);
 	}
 
 	public void LogPermanent (string logText) {
-
-		if (timeSinceLastLog > 1) Log(logText).GetComponent<LogText>().permanent = true;
+		if (timeSinceLastLog > minTimeBetweenLogs) CreateLogText(logText).MakePermanent();
 		else permanentStandbyLogs.Add(logText);
 	}
 }

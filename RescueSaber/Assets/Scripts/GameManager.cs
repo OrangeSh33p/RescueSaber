@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager> {
+    [Header("References")]
     public Bus bus;
     public CameraManager cameraManager;
-    public ChunkManager chunkManager;
+    public LevelManager levelManager;
     public UIManager uIManager;
     public Stopover stopover;
     public FoodManager foodManager;
-    public InputManager inputManager;
     public TimeManager timeManager;
+
 
     public void Defeat () {
         float rawDays = Time.timeSinceLevelLoad/timeManager.dayDuration +0.04f;

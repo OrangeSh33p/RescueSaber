@@ -461,8 +461,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc575238ace316846bb90fbcae5d9f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2100000, guid: 2fa94d7df752c78499701ba4dc6b6862, type: 2}
-  - {fileID: 2100000, guid: e3975d9dd0278cd4b8fdf375328e668b, type: 2}
-  - {fileID: 2100000, guid: 1ad627cfd0c3d734bbb633ae76e3db3d, type: 2}
-  ground: {fileID: 1672119167552150}
+  visuals: {fileID: 23425870299752270}
