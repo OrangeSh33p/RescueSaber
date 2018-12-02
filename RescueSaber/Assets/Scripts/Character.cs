@@ -14,8 +14,14 @@ public class Character : MonoBehaviour {
 	public CharacterIcon icon;
 
 	[Header("State : General")]
-	public float hp; //value is between 0 and 1
 	public State state;
+
+	[Header("State : Stats")] //all values between 0 and 1
+	public float hp;
+	public float big;
+	public float chill;
+	public float sharp;
+	public float smooth;
 
 	[Header("State : Hunger")]
 	public Hunger hunger;
@@ -49,9 +55,9 @@ public class Character : MonoBehaviour {
 	//BASIC METHODS
 	void Start () {
 		characters.Add(this);
-		hp = 1;
-		hunger = Hunger.SATED;
+		SetHunger(Hunger.SATED);
 		GetInBus();
+		InitStats();
 		InitIcon();
 	}
 
@@ -102,6 +108,16 @@ public class Character : MonoBehaviour {
 		icon.SetHP(0);
 		icon.Death();
 		Destroy(gameObject);
+	}
+
+
+	//STATS
+	public void InitStats () {
+		hp = 1;
+		big = (Random.value + Random.value) / 2; //Average of two random values, to get something random but not too extreme
+		chill = (Random.value + Random.value) / 2;
+		sharp = (Random.value + Random.value) / 2;
+		smooth = (Random.value + Random.value) / 2;
 	}
 
 
