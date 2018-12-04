@@ -82,6 +82,7 @@ public class Character : MonoBehaviour {
 	void InitIcon() {
 		SetHP(hp);
 		icon.SetName(gameObject.name);
+		icon.SetStats(big, chill, sharp, smooth);
 		icon.ChangeFace(hunger);
 	}
 
@@ -114,10 +115,10 @@ public class Character : MonoBehaviour {
 	//STATS
 	void InitStats() {
 		hp = 1;
-		big = (Random.value + Random.value ) / 2; //A little bit random but not too much
-		chill = (Random.value + Random.value ) / 2;
-		sharp = (Random.value + Random.value ) / 2;
-		smooth = (Random.value + Random.value ) / 2;
+		big = (Random.value + Random.value + Random.value ) / 3; //A little bit random but not too much
+		chill = (Random.value + Random.value + Random.value ) / 3;
+		sharp = (Random.value + Random.value + Random.value ) / 3;
+		smooth = (Random.value + Random.value + Random.value ) / 3;
 	}
 
 

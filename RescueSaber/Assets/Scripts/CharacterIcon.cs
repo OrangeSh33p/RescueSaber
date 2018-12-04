@@ -10,10 +10,12 @@ public class CharacterIcon : MonoBehaviour {
 	public Image hpBarColor;
 	public Text face;
 	public Text charaName;
+	public Text stats;
 	
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
 		private UIManager ui { get { return gm.uIManager; } }
+	private Utils ut { get {return Utils.Instance; } }
 
 	public void SetHP (float value) {
 		hpBar.value = value;
@@ -25,6 +27,9 @@ public class CharacterIcon : MonoBehaviour {
 
 	public void SetName (string value) {
 		charaName.text = value;
+	}
+	public void SetStats (float big, float chill, float sharp, float smooth) {
+		stats.text = (ui.big+ut.Intify(big)+"  "+ui.chill+ut.Intify(chill)+"  "+ui.sharp+ut.Intify(sharp)+"  "+ui.smooth+ut.Intify(smooth));
 	}
 
 	public void Death () {
