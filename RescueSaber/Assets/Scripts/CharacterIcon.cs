@@ -15,28 +15,31 @@ public class CharacterIcon : MonoBehaviour {
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
 		private UIManager ui { get { return gm.uIManager; } }
-	private Utils ut { get {return Utils.Instance; } }
+		private StatsManager sm { get { return gm.statsManager; } }
 
 	public void SetHP (float value) {
 		hpBar.value = value;
 		hpBarColor.color = new Color ( //HP bar color ranges from green (full hp) to red (no hp), always at full saturation
 			Mathf.Clamp01(2*(1-value)), 
 			Mathf.Clamp01(value*2), 
-			0);
+			0
+		);
 	}
 
 	public void SetName (string value) {
 		charaName.text = value;
 	}
+
 	public void SetStats (float big, float chill, float sharp, float smooth) {
-		stats.text = (ui.big+ut.Intify(big)+"  "+ui.chill+ut.Intify(chill)+"  "+ui.sharp+ut.Intify(sharp)+"  "+ui.smooth+ut.Intify(smooth));
+		stats.text = (
+			ui.bigIcon + sm.Intify(big) + "  "
+			+ ui.chillIcon + sm.Intify(chill) + "  "
+			+ ui.sharpIcon + sm.Intify(sharp) + "  "
+			+ ui.smoothIcon + sm.Intify(smooth)
+		);
 	}
 
-	public void Death () {
-		ChangeFace(Character.Hunger.DEAD);
-	}
-
-	public void ChangeFace (Character.Hunger state) {
+	public void SetFace (Character.Hunger state) {
 		switch (state) {
 			case Character.Hunger.FULL : face.text = ui.fullFace;
 				break;
@@ -49,6 +52,10 @@ public class CharacterIcon : MonoBehaviour {
 			case Character.Hunger.DEAD : face.text = ui.deadFace;
 				break;
 		}
+	}
+
+	public void Death () {
+		SetFace(Character.Hunger.DEAD);
 	}
 
 	public void Clicked () {

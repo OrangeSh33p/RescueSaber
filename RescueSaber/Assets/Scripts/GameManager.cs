@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager> {
     public Stopover stopover;
     public FoodManager foodManager;
     public TimeManager timeManager;
+    public StatsManager statsManager;
 
 
     public void Defeat () {

@@ -24,10 +24,10 @@ public class UIManager : MonoBehaviour {
 	public string deadFace;
 
 	[Header("Balancing : Stats")]
-	public string big;
-	public string chill;
-	public string sharp;
-	public string smooth;
+	public string bigIcon;
+	public string chillIcon;
+	public string sharpIcon;
+	public string smoothIcon;
 
 	[Header("References")]
 	public GameObject stopoverSign;

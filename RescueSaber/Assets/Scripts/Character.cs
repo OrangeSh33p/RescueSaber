@@ -18,10 +18,10 @@ public class Character : MonoBehaviour {
 
 	[Header("State : Stats")] //all values between 0 and 1
 	public float hp;
-	public float big;
-	public float chill;
-	public float sharp;
-	public float smooth;
+	public Stat big;
+	public Stat chill;
+	public Stat sharp;
+	public Stat smooth;
 
 	[Header("State : Hunger")]
 	public Hunger hunger;
@@ -44,6 +44,20 @@ public class Character : MonoBehaviour {
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
 	public enum BusSide {LEFT, RIGHT}
 	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
+	public enum StatType {BIG, CHILL, SHARP, SMOOTH}
+
+	//Structs
+	public struct Stat {
+		public StatType type;
+		public float value; //values between 0 and 1
+		public Character owner;
+
+		public Stat (StatType type, float value, Character owner) {
+			this.type = type;
+			this.value = value;
+			this.owner = owner;
+		}
+	}
 
 	//Characters list
 	static List<Character> _characters;
@@ -82,8 +96,8 @@ public class Character : MonoBehaviour {
 	void InitIcon() {
 		SetHP(hp);
 		icon.SetName(gameObject.name);
-		icon.SetStats(big, chill, sharp, smooth);
-		icon.ChangeFace(hunger);
+		icon.SetStats(big.value, chill.value, sharp.value, smooth.value);
+		icon.SetFace(hunger);
 	}
 
 
@@ -115,17 +129,17 @@ public class Character : MonoBehaviour {
 	//STATS
 	void InitStats() {
 		hp = 1;
-		big = (Random.value + Random.value + Random.value ) / 3; //A little bit random but not too much
-		chill = (Random.value + Random.value + Random.value ) / 3;
-		sharp = (Random.value + Random.value + Random.value ) / 3;
-		smooth = (Random.value + Random.value + Random.value ) / 3;
+		big = new Stat (StatType.BIG, Random.Range(0.2f, 0.6f), this);
+		chill = new Stat (StatType.CHILL, Random.Range(0.2f, 0.6f), this);
+		sharp = new Stat (StatType.SHARP, Random.Range(0.2f, 0.6f), this);
+		smooth = new Stat (StatType.SMOOTH, Random.Range(0.2f, 0.6f), this);
 	}
 
 
 	//HUNGER
 	void SetHunger (Hunger hunger) {
 		this.hunger = hunger;
-		icon.ChangeFace(hunger);
+		icon.SetFace(hunger);
 	}
 
 	public void Eat() {
