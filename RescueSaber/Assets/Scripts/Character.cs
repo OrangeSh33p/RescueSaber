@@ -39,6 +39,7 @@ public class Character : MonoBehaviour {
 		private Stopover stopover { get { return gm.stopover; } }
 		private TimeManager timeManager { get { return gm.timeManager; } }
 		private UIManager ui { get { return gm.uIManager; } }
+		private StatsManager stats { get { return gm.StatsManager; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
@@ -46,21 +47,22 @@ public class Character : MonoBehaviour {
 	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
 	public enum StatType {BIG, CHILL, SHARP, SMOOTH}
 
-	//Structs
+	//Stat struct
+	[System.Serializable]
 	public struct Stat {
+		public Character owner;
 		public StatType type;
 		public float value; //values between 0 and 1
-		public Character owner;
 
-		public Stat (StatType type, float value, Character owner) {
+		public Stat (Character owner, StatType type, float value) {
+			this.owner = owner;
 			this.type = type;
 			this.value = value;
-			this.owner = owner;
 		}
 	}
 
 	//Characters list
-	static List<Character> _characters;
+	private static List<Character> _characters;
 	public static List<Character> characters { 
 		get { if (_characters == null) _characters = new List<Character>(); 
 			return _characters; } }
@@ -129,10 +131,11 @@ public class Character : MonoBehaviour {
 	//STATS
 	void InitStats() {
 		hp = 1;
-		big = new Stat (StatType.BIG, Random.Range(0.2f, 0.6f), this);
-		chill = new Stat (StatType.CHILL, Random.Range(0.2f, 0.6f), this);
-		sharp = new Stat (StatType.SHARP, Random.Range(0.2f, 0.6f), this);
-		smooth = new Stat (StatType.SMOOTH, Random.Range(0.2f, 0.6f), this);
+
+		big = new Stat (this, StatType.BIG, Random.Range(0.2f, 0.6f));
+		chill = new Stat (this, StatType.CHILL, Random.Range(0.2f, 0.6f));
+		sharp = new Stat (this, StatType.SHARP, Random.Range(0.2f, 0.6f));
+		smooth = new Stat (this, StatType.SMOOTH, Random.Range(0.2f, 0.6f));
 	}
 
 
@@ -157,7 +160,7 @@ public class Character : MonoBehaviour {
 			float regenAmount = Random.Range(food.minHpRegen, food.maxHpRegen); //Add hp
 			AddHP(regenAmount);
 
-			ui.Log(name+" ate and regained "+(int)(regenAmount*100)+" hp !");
+			ui.Log(name+" ate and regained "+stats.Intify(regenAmount)+" hp !");
 		} 
 	}
 
