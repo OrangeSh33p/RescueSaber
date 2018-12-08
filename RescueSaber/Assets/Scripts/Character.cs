@@ -39,7 +39,7 @@ public class Character : MonoBehaviour {
 		private Stopover stopover { get { return gm.stopover; } }
 		private TimeManager timeManager { get { return gm.timeManager; } }
 		private UIManager ui { get { return gm.uIManager; } }
-		private StatsManager stats { get { return gm.StatsManager; } }
+		private StatsManager sm { get { return gm.statsManager; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
@@ -50,6 +50,7 @@ public class Character : MonoBehaviour {
 	//Stat struct
 	[System.Serializable]
 	public struct Stat {
+		[HideInInspector]
 		public Character owner;
 		public StatType type;
 		public float value; //values between 0 and 1
@@ -85,6 +86,8 @@ public class Character : MonoBehaviour {
 			Death("You have left "+name+" to die on the road..."); //kill character if too far
 
 		IncreaseHunger();
+
+		if (Input.GetKeyDown(KeyCode.T)) StatTest();
 	}
 
 	void OnDestroy () {
@@ -138,6 +141,12 @@ public class Character : MonoBehaviour {
 		smooth = new Stat (this, StatType.SMOOTH, Random.Range(0.2f, 0.6f));
 	}
 
+	void StatTest () {
+		float bonus = 0;
+		StatType result = sm.test(new List<Stat> {big, chill, sharp, smooth}, out bonus).type;
+		Debug.Log(name + " decided to act "+ result + " with and extra efficiency of " + sm.Intify(bonus));
+	}
+
 
 	//HUNGER
 	void SetHunger (Hunger hunger) {
@@ -160,7 +169,7 @@ public class Character : MonoBehaviour {
 			float regenAmount = Random.Range(food.minHpRegen, food.maxHpRegen); //Add hp
 			AddHP(regenAmount);
 
-			ui.Log(name+" ate and regained "+stats.Intify(regenAmount)+" hp !");
+			ui.Log(name+" ate and regained "+sm.Intify(regenAmount)+" hp !");
 		} 
 	}
 

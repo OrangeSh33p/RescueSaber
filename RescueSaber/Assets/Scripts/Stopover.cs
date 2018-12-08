@@ -33,9 +33,10 @@ public class Stopover : MonoBehaviour {
 
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
-	private UIManager ui { get { return gm.uIManager; } }
-	private GameObject stopoverSign { get { return ui.stopoverSign; } }
-	private Text stopoverText { get { return ui.stopoverText; } }
+		private UIManager ui { get { return gm.uIManager; } }
+			private GameObject stopoverSign { get { return ui.stopoverSign; } }
+			private Text stopoverText { get { return ui.stopoverText; } }
+		private StatsManager sm { get { return gm.statsManager; } }
 
 	void Start () {
 		gm.stopover = this;
@@ -101,11 +102,11 @@ public class Stopover : MonoBehaviour {
 				
 				//Handle log messages
 				if (target.hp > damage && target.hp < Random.value) { //Character takes damage and runs away
-					ui.Log(target.name+" took "+(int)(damage*100)+" damage and ran away !");//Chance to run away after being hit = % hp missing
+					ui.Log(target.name+" took "+sm.Intify(damage)+" damage and ran away !");//Chance to run away after being hit = % hp missing
 					target.ExitStopover();
 				}
 
-				else ui.Log(target.name+" took "+(int)(damage*100)+" damage !"); //Character takes damage
+				else ui.Log(target.name+" took "+sm.Intify(damage)+" damage !"); //Character takes damage
 
 				//Deduct character hp
 				target.Damage(damage);

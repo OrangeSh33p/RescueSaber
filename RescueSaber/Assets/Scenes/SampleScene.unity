@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641508, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657922, g: 0.49641544, b: 0.5748184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -113,11 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &22549787 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3,
-    type: 2}
-  m_PrefabInternal: {fileID: 204900886}
 --- !u!1 &45013789 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1525749353477052, guid: 699bf8e4929d54d499d3d66741f197c5,
@@ -168,11 +163,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: foodIcon
-      value: 
-      objectReference: {fileID: 1606789286}
     - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
       propertyPath: bus
@@ -195,9 +185,9 @@ Prefab:
       objectReference: {fileID: 1541186995}
     - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
-      propertyPath: startFood
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: foodIcon
+      value: 
+      objectReference: {fileID: 1606789286}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
   m_IsPrefabAsset: 0
@@ -278,49 +268,29 @@ Prefab:
       propertyPath: LD
       value: 
       objectReference: {fileID: 45013789}
+    - target: {fileID: 114764062818120204, guid: 9c4dcfa632737be448a47aa962eb3f0a,
+        type: 2}
+      propertyPath: big.owner
+      value: 
+      objectReference: {fileID: 115866930}
+    - target: {fileID: 114764062818120204, guid: 9c4dcfa632737be448a47aa962eb3f0a,
+        type: 2}
+      propertyPath: chill.owner
+      value: 
+      objectReference: {fileID: 115866930}
+    - target: {fileID: 114764062818120204, guid: 9c4dcfa632737be448a47aa962eb3f0a,
+        type: 2}
+      propertyPath: sharp.owner
+      value: 
+      objectReference: {fileID: 115866930}
+    - target: {fileID: 114764062818120204, guid: 9c4dcfa632737be448a47aa962eb3f0a,
+        type: 2}
+      propertyPath: smooth.owner
+      value: 
+      objectReference: {fileID: 115866930}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4dcfa632737be448a47aa962eb3f0a, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &788355172
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 788355173}
-  - component: {fileID: 788355174}
-  m_Layer: 0
-  m_Name: StatsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &788355173
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 788355172}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 22549787}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &788355174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 788355172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c555c9bc30adf3243b0d1ab57e1c66c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &803839852 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114244604247954620, guid: 9c4dcfa632737be448a47aa962eb3f0a,
@@ -688,46 +658,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1198794804}
   m_Script: {fileID: 11500000, guid: 2bc3efe06c57ef5498ae97ecfeebc3bb, type: 3}
---- !u!1 &1964940123
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1964940124}
-  - component: {fileID: 1964940125}
-  m_Layer: 0
-  m_Name: Utils
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1964940124
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1964940123}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 22549787}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964940125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1964940123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92bfcd8b01b01a47bd2d790deb03f8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2011411486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114424863139698524, guid: b3324bce08579a247a6bf4752386dcb7,
@@ -1039,6 +969,26 @@ Prefab:
     - target: {fileID: 114646630748716006, guid: b3324bce08579a247a6bf4752386dcb7,
         type: 2}
       propertyPath: smooth
+      value: "\u264C\uFE0E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114646630748716006, guid: b3324bce08579a247a6bf4752386dcb7,
+        type: 2}
+      propertyPath: bigIcon
+      value: "\u2649\uFE0E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114646630748716006, guid: b3324bce08579a247a6bf4752386dcb7,
+        type: 2}
+      propertyPath: smoothIcon
+      value: "\u264A\uFE0E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114646630748716006, guid: b3324bce08579a247a6bf4752386dcb7,
+        type: 2}
+      propertyPath: chillIcon
+      value: "\u264B\uFE0E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114646630748716006, guid: b3324bce08579a247a6bf4752386dcb7,
+        type: 2}
+      propertyPath: sharpIcon
       value: "\u264C\uFE0E"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
