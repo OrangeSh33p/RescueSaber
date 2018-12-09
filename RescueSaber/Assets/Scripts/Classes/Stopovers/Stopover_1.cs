@@ -1,0 +1,49 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Stopover_1 : Stopover {
+	[Space (25)]
+	[Header ("Stopover 1 : Fight test")]
+	[Tooltip(
+		"Stopover 1 : Fight test.\n\n"+
+		"This stopover consists of a single fight againt 3 to 5 enemies." )]
+	public bool description;
+
+	[Header("Balancing : Fight")]
+	public int minEnemies;
+	public int maxEnemies;
+	public float minDamage;
+	public float maxDamage;
+	public float enemyBig;
+	
+	[Header ("Balancing : Rewards")]
+	public int minFood;
+	public int maxFood;
+
+	[Header ("State")]
+	public int amountOfEnemies;
+
+	//Storage
+	private GameManager gm { get { return GameManager.Instance; } }
+		private UIManager ui { get { return gm.uIManager; } }
+
+	//BASIC METHODS
+	protected override void OnStart () {
+		amountOfEnemies = Random.Range(minEnemies, maxEnemies+1);
+	}
+
+	//ENTRIES AND EXITS
+	protected override void OnEnter () {
+		if (charactersInvolved.Count == 1) StartCoroutine(Fight( new FightState(amountOfEnemies, minDamage, maxDamage, enemyBig) ));
+	}
+
+	//FIGHT
+	protected override void Victory() {
+			ui.Log("Victory!");
+
+			int foodGained = Random.Range(minFood, maxFood+1);
+			gm.foodManager.AddFood(foodGained);
+			ui.Log("You find "+foodGained+" food in the ruins");
+	}
+}

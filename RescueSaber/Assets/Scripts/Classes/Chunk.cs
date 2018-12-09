@@ -8,7 +8,7 @@ public class Chunk : MonoBehaviour {
 
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
-	private LevelManager levelManager { get { return gm.levelManager; } }
+		private LevelManager levelManager { get { return gm.levelManager; } }
 
 	//Chunks list
 	static List<Chunk> _chunks;

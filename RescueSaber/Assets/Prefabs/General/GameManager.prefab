@@ -75,6 +75,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1821881175550252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4889527333818534}
+  - component: {fileID: 114933852947489346}
+  m_Layer: 0
+  m_Name: StopoverManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1919666429221238
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +147,7 @@ Transform:
   - {fileID: 4210972905239144}
   - {fileID: 4661879794491170}
   - {fileID: 4853399761141086}
+  - {fileID: 4889527333818534}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -160,6 +177,19 @@ Transform:
   m_Father: {fileID: 4614158937441112}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4889527333818534
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821881175550252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4614158937441112}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114041292601844304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,13 +213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bus: {fileID: 0}
-  cameraManager: {fileID: 0}
-  levelManager: {fileID: 0}
-  uIManager: {fileID: 0}
   stopover: {fileID: 0}
+  cameraManager: {fileID: 0}
   foodManager: {fileID: 114758608716094778}
-  timeManager: {fileID: 114233441222912664}
+  levelManager: {fileID: 0}
   statsManager: {fileID: 114491509690375064}
+  stopoverManager: {fileID: 114933852947489346}
+  timeManager: {fileID: 114233441222912664}
+  uIManager: {fileID: 0}
 --- !u!114 &114233441222912664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,3 +262,22 @@ MonoBehaviour:
   maxHpRegen: 0.15
   startFood: 5
   foodIcon: {fileID: 0}
+--- !u!114 &114933852947489346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821881175550252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea5acbe328dbd146811059f0b189e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToShowText: 50
+  distanceToShowSecondText: 20
+  distanceToHideText: 10
+  roundDuration: 1
+  defaultAmountOfEnemies: 3
+  defaultEnemyBig: 0.35
+  defaultMinDamage: 0
+  defaultMaxDamage: 0.4

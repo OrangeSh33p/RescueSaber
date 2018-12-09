@@ -5,13 +5,15 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager> {
     [Header("References")]
     public Bus bus;
-    public CameraManager cameraManager;
-    public LevelManager levelManager;
-    public UIManager uIManager;
     public Stopover stopover;
+
+    public CameraManager cameraManager;
     public FoodManager foodManager;
-    public TimeManager timeManager;
+    public LevelManager levelManager;
     public StatsManager statsManager;
+    public StopoverManager stopoverManager;
+    public TimeManager timeManager;
+    public UIManager uIManager;
 
 
     public void Defeat () {

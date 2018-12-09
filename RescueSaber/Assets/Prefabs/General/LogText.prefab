@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestruction: 2
-  speed: 20
+  speed: 30
 --- !u!222 &222003823046507612
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4238723035028376}
   - component: {fileID: 114917011165851914}
   m_Layer: 0
-  m_Name: Stopover - Den
+  m_Name: Stopover_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,19 +192,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845800958249290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3661997a09fd7a444a0b883f1e9994ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 28b8cb926cbb3834fa688e72cdffe29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterHolder: {fileID: 4349404378451392}
   entrance: {fileID: 4273112408702754}
-  distanceToShowText: 50
-  distanceToShowSecondText: 20
-  distanceToHideText: 10
-  roundDuration: 1
-  amountOfEnemies: 4
+  charactersInvolved: []
+  description: 0
+  minEnemies: 3
+  maxEnemies: 5
   minDamage: 0
   maxDamage: 0.4
-  hp: 3
+  enemyBig: 0.35
   minFood: 1
   maxFood: 4
-  characterHolder: {fileID: 4349404378451392}
-  charactersInvolved: []
+  amountOfEnemies: 5

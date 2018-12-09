@@ -144,7 +144,7 @@ public class Character : MonoBehaviour {
 	void StatTest () {
 		float bonus = 0;
 		StatType result = sm.test(new List<Stat> {big, chill, sharp, smooth}, out bonus).type;
-		Debug.Log(name + " decided to act "+ result + " with and extra efficiency of " + sm.Intify(bonus));
+		Debug.Log(name + " decided to act "+ result + " with an extra efficiency of " + sm.Intify(bonus));
 	}
 
 

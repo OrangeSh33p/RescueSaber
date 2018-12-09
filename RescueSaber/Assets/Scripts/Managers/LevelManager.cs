@@ -65,6 +65,7 @@ public class LevelManager : MonoSingleton<LevelManager> {
 		if (chunksToNextStopover == 0) { //Create stopover in chunk if needed
 			CreateStopover(chunk.transform);
 			PrepareNextStopover();
+			chunk.name = "Stopover";
 		} else {
 			chunksToNextStopover --;
 		}
