@@ -135,10 +135,10 @@ public class Character : MonoBehaviour {
 	void InitStats() {
 		hp = 1;
 
-		big = new Stat (this, StatType.BIG, Random.Range(0.2f, 0.6f));
-		chill = new Stat (this, StatType.CHILL, Random.Range(0.2f, 0.6f));
-		sharp = new Stat (this, StatType.SHARP, Random.Range(0.2f, 0.6f));
-		smooth = new Stat (this, StatType.SMOOTH, Random.Range(0.2f, 0.6f));
+		big = new Stat (this, StatType.BIG, Mathf.Pow(Random.value, 2));
+		chill = new Stat (this, StatType.CHILL, Mathf.Pow(Random.value, 2));
+		sharp = new Stat (this, StatType.SHARP, Mathf.Pow(Random.value, 2));
+		smooth = new Stat (this, StatType.SMOOTH, Mathf.Pow(Random.value, 2));
 	}
 
 	void StatTest () {

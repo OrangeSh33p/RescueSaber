@@ -6,8 +6,8 @@ public class Stopover_1 : Stopover {
 	[Space (25)]
 	[Header ("Stopover 1 : Fight test")]
 	[Tooltip(
-		"Stopover 1 : Fight test.\n\n"+
-		"This stopover consists of a single fight againt 3 to 5 enemies." )]
+		"Stopover 1 : Fight test\n\n"+
+		"This stopover consists of a single fight againt 3 to 5 enemies. You get food as reward." )]
 	public bool description;
 
 	[Header("Balancing : Fight")]
@@ -35,13 +35,14 @@ public class Stopover_1 : Stopover {
 
 	//ENTRIES AND EXITS
 	protected override void OnEnter () {
-		if (charactersInvolved.Count == 1) StartCoroutine(Fight( new FightState(amountOfEnemies, minDamage, maxDamage, enemyBig) ));
+		if (charactersInvolved.Count == 1) {
+			ui.Log(amountOfEnemies + " bandits jump you !");
+			StartCoroutine(Fight( new FightState(amountOfEnemies, minDamage, maxDamage, enemyBig) ));
+		}
 	}
 
 	//FIGHT
-	protected override void Victory() {
-			ui.Log("Victory!");
-
+	protected override void OnVictory() {
 			int foodGained = Random.Range(minFood, maxFood+1);
 			gm.foodManager.AddFood(foodGained);
 			ui.Log("You find "+foodGained+" food in the ruins");

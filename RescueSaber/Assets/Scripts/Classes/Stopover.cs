@@ -54,11 +54,17 @@ public abstract class Stopover : MonoBehaviour {
 
 	void Update () {
 		DisplaySign();
+		OnUpdate ();
 	}
+
+	protected virtual void OnUpdate () {}
 
 	void OnDestroy () {
 		gm.stopover = null;
+		OnOnDestroy ();
 	}
+
+	protected virtual void OnOnDestroy () {}
 
 	//SIGN
 	void DisplaySign () {
@@ -96,8 +102,7 @@ public abstract class Stopover : MonoBehaviour {
 	
 	//FIGHT
 	protected IEnumerator Fight(FightState fightState) {
-		ui.Log(fightState.amountOfEnemies + " bandits jump you !");
-		yield return new WaitForSeconds(2 * som.roundDuration);
+		yield return new WaitForSeconds(som.roundDuration);
 
 		//Keep playing till one of the sides has been defeated
 		while (fightState.amountOfEnemies > 0 && charactersInvolved.Count > 0) {
@@ -138,8 +143,8 @@ public abstract class Stopover : MonoBehaviour {
 		}
 
 		//Determine outcome
-		if (fightState.amountOfEnemies == 0) Victory ();
-		else defeat ();
+		if (fightState.amountOfEnemies == 0) OnVictory ();
+		else OnDefeat ();
 
 		//All characters exit location
 		for (int i=charactersInvolved.Count-1;i>=0;i--) { //Inverse "for" loop because we are removing elements from the list
@@ -148,7 +153,17 @@ public abstract class Stopover : MonoBehaviour {
 		}
 	}
 
-	protected virtual void Victory () { ui.Log("Victory!"); }
+	private void Victory () {
+		ui.Log("Victory!");
+		OnVictory ();
+	}
 
-	protected virtual void defeat () { ui.Log("Retreat !"); }
+	protected virtual void OnVictory () { }
+
+	private void Defeat () {
+		ui.Log("Retreat !");
+		OnDefeat ();
+	}
+
+	protected virtual void OnDefeat () { }
 }
