@@ -8,10 +8,10 @@ public class Stopover_2 : Stopover {
 	[Header ("Stopover 2 : Decision Making")]
 	[Tooltip(
 		"Stopover 2 : Decision Making\n\n"+
-		"The characters are at a crossroads. One of them will have to take the lead and make a decision for the group."+
-		"- BIG : the character loses his cool and starts fighting. They find food."+
-		"- CHILL : the character makes friends, gets some HP healed."+
-		"- SHARP : the character gets the others to heal them in exchange for food."+
+		"The characters are at a crossroads. One of them will have to take the lead and make a decision for the group.\n"+
+		"- BIG : the character loses his cool and starts fighting. They find food.\n"+
+		"- CHILL : the character makes friends, gets some HP healed.\n"+
+		"- SHARP : the character gets the others to heal them in exchange for food.\n"+
 		"- SMOOTH : the character has a chance of convincing someone to join the team." )]
 	public bool description;
 
