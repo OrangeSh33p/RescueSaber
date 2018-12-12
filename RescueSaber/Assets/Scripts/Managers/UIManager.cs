@@ -63,17 +63,17 @@ public class UIManager : MonoBehaviour {
 	}
 
 	LogText CreateLogText (string logText) {
-			GameObject log = Instantiate (
-				logPrefab, 
-				console.position, 
-				Quaternion.identity, 
-				console
-				);
-			
-			log.GetComponent<Text>().text = logText;
-			timeSinceLastLog = 0;
+		GameObject log = Instantiate (
+			logPrefab, 
+			console.position, 
+			Quaternion.identity, 
+			console
+			);
+		
+		log.GetComponent<Text>().text = logText;
+		timeSinceLastLog = 0;
 
-			return log.GetComponent<LogText>();
+		return log.GetComponent<LogText>();
 		
 	}
 

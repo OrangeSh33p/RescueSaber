@@ -11,7 +11,10 @@ public abstract class Stopover : MonoBehaviour {
 	public Transform entrance;
 
 	[Header("State")]
+	public bool isEnabled;
 	public List<Character> charactersInvolved;
+	protected int round; //Index of current round. Set it to minus one to stop events
+	protected FightState fightState;
 	private bool signIsGone = false; //True if sign has been showed once. after that, IT IS GONE
 
 	//Storage
@@ -23,7 +26,8 @@ public abstract class Stopover : MonoBehaviour {
 		private StatsManager sm { get { return gm.statsManager; } }
 
 	//Fightstate struct (used to initialise a fight)
-	protected struct FightState {
+	[System.Serializable]
+	public struct FightState {
 		public int amountOfEnemies;
 		public float enemyBig;
 		public float minDamage;
@@ -44,117 +48,162 @@ public abstract class Stopover : MonoBehaviour {
 		}
 	}
 
-	//BASIC METHODS
-	void Start () {
+
+	//--------------------
+	// BASIC METHODS
+	//--------------------
+
+	private void Start () {
 		gm.stopover = this;
 		OnStart ();
 	}
 
 	protected virtual void OnStart () {}
 
-	void Update () {
+	private void Update () {
 		DisplaySign();
 		OnUpdate ();
 	}
 
 	protected virtual void OnUpdate () {}
 
-	void OnDestroy () {
+	private void OnDestroy () {
 		gm.stopover = null;
 		OnOnDestroy ();
 	}
 
 	protected virtual void OnOnDestroy () {}
 
-	//SIGN
-	void DisplaySign () {
-		int distance = Mathf.FloorToInt(Vector3.Distance(gm.bus.transform.position, transform.position));
 
-		if (!signIsGone && distance < som.distanceToShowText && distance > som.distanceToShowSecondText) { //If close enough, show stopover sign
-			stopoverSign.SetActive(true);
-			stopoverText.text = "You can see something of interest "+ distance +" meters away...";
-		}
+	//--------------------
+	// SIGN
+	//--------------------
 
-		else if (distance < som.distanceToShowSecondText && distance > som.distanceToHideText) { //If closer, change stopover sign text
-			stopoverText.text = "You can see something of interest very close...";
-		}
+	private void DisplaySign () {
+		if (!signIsGone) {
+			int distance = Mathf.FloorToInt(Vector3.Distance(gm.bus.transform.position, transform.position));
 
-		else if (distance < som.distanceToHideText && stopoverSign.activeInHierarchy) { //If very close, hide sign
-			stopoverSign.SetActive(false);
-			signIsGone = true;
+			if (distance < som.distanceToShowText && distance > som.distanceToShowSecondText) { //If close enough, show stopover sign
+				stopoverSign.SetActive(true);
+				stopoverText.text = "You can see something of interest "+ distance +" meters away...";
+			}
+
+			else if (distance < som.distanceToShowSecondText && distance > som.distanceToHideText) { //If closer, change stopover sign text
+				stopoverText.text = "You can see something of interest very close...";
+			}
+
+			else if (distance < som.distanceToHideText && stopoverSign.activeInHierarchy) { //If very close, hide sign
+				stopoverSign.SetActive(false);
+				signIsGone = true;
+			}
 		}
 	}
 
-	//ENTRIES AND EXITS
-	public void Enter(Character character) { //Called by characters to enter the stopover
+
+	//--------------------
+	// ENTRIES AND EXITS
+	//--------------------
+
+	public void Enter(Character character) { //Called by characters
 		charactersInvolved.Add(character);
+		if (charactersInvolved.Count == 1) StartEvents(); //When character enters an empty stopover, start events			
 		OnEnter();
 	}
 
 	protected virtual void OnEnter () {}
 	
-	public void Exit (Character character) { //Called by characters to exit the stopover
+	public void Exit (Character character) { //Called by characters
 		charactersInvolved.Remove(character);
 		OnExit();
 	}
 
 	protected virtual void OnExit () {}	
-	
-	//FIGHT
-	protected IEnumerator Fight(FightState fightState) {
-		yield return new WaitForSeconds(som.roundDuration);
 
-		//Keep playing till one of the sides has been defeated
-		while (fightState.amountOfEnemies > 0 && charactersInvolved.Count > 0) {
-			//Test all fighters' BIG, result is the one who lands a blow
-			Character.Stat enemyBig = new Character.Stat (null, Character.StatType.BIG, fightState.enemyBig); //Placeholder stat for enemy's BIG
-
-			List<Character.Stat> fighters = new List<Character.Stat>(); //Make a list of all the fighters
-			foreach (Character character in charactersInvolved) fighters.Add(character.big); //Add all characters
-			for (int i=0;i<fightState.amountOfEnemies;i++) fighters.Add(enemyBig); //Add all enemies
-
-			Character attacker = sm.test(fighters).owner; //Test values against each other, owner of the winning stat becomes attacker
-
-
-			//Enemy is hit (attacker is a character)
-			if (attacker != null) {
-				ui.Log(attacker.name + " defeated an enemy !");
-				fightState.amountOfEnemies --;
-			} 
-
-			//Character is hit (attacker is null, i.e. an enemy)
-			else {
-				Character target = charactersInvolved[Random.Range(0,charactersInvolved.Count)]; //Pick random character
-				float damage = Random.Range(fightState.minDamage, fightState.maxDamage); //Generate damage
-				
-				//Handle log messages
-				if (target.hp > damage && target.hp < Random.value) { //Character takes damage and runs away
-					ui.Log(target.name+" took "+sm.Intify(damage)+" damage and ran away !");//Chance to run away after being hit = % hp missing
-					target.ExitStopover();
-				}
-
-				else ui.Log(target.name+" took "+sm.Intify(damage)+" damage !"); //Character takes damage
-
-				target.Damage(damage); //Deduct character hp
-			} 
-
-			//Wait till the start of next round
+	private IEnumerator Evacuate () {
+		StopEvents();
+		while (charactersInvolved.Count > 0) {
 			yield return new WaitForSeconds(som.roundDuration);
-		}
-
-		//Determine outcome
-		if (fightState.amountOfEnemies == 0) OnVictory ();
-		else OnDefeat ();
-
-		//All characters exit location
-		for (int i=charactersInvolved.Count-1;i>=0;i--) { //Inverse "for" loop because we are removing elements from the list
-			charactersInvolved[i].ExitStopover();
-			yield return new WaitForSeconds(som.roundDuration);
+			charactersInvolved[charactersInvolved.Count-1].ExitStopover();
 		}
 	}
 
+
+	//--------------------
+	// EVENTS
+	//--------------------
+
+	private void StartEvents () {
+		round = 1;
+		StartCoroutine (Events());
+	}
+
+	private void NextEvent () {
+		round ++;
+	}
+
+	private void StopEvents () {
+		round = -1;
+	}
+
+	protected bool EventsHappening () {
+		return round > 0;
+	}
+
+	private IEnumerator Events () {
+		while (EventsHappening()) {
+			yield return new WaitForSeconds(som.roundDuration);
+			OnEvent ();
+			NextEvent ();
+		}
+	}
+
+	protected virtual void OnEvent () { }
+
+
+	//--------------------
+	// FIGHT
+	//--------------------
+
+	protected void Fight () { //Play one round of fight
+		//Test all fighters' BIG, result is the one who lands a blow
+		Character.Stat enemyBig = new Character.Stat (null, Character.StatType.BIG, fightState.enemyBig); //Placeholder stat for enemy's BIG
+
+		List<Character.Stat> fighters = new List<Character.Stat>(); //Make a list of all the fighters
+		foreach (Character character in charactersInvolved) fighters.Add(character.big); //Add all characters
+		for (int i=0;i<fightState.amountOfEnemies;i++) fighters.Add(enemyBig); //Add all enemies
+
+		Character attacker = sm.test(fighters).owner; //Test values against each other, owner of the winning stat becomes attacker
+
+		//If enemy is hit (attacker is a character)
+		if (attacker != null) {
+			ui.Log(attacker.name + " defeated an enemy !");
+			fightState.amountOfEnemies --;
+		} 
+
+		//If character is hit (attacker is null, i.e. an enemy)
+		else {
+			Character target = charactersInvolved[Random.Range(0,charactersInvolved.Count)]; //Pick random character
+			float damage = Random.Range(fightState.minDamage, fightState.maxDamage); //Generate damage
+			
+			//Handle log messages
+			if (target.hp > damage && target.hp < Random.value) { //Character takes damage and runs away
+				ui.Log(target.name+" took "+sm.Intify(damage)+" damage and ran away !");//Chance to run away after being hit = % hp missing
+				target.ExitStopover();
+			}
+
+			else ui.Log(target.name+" took "+sm.Intify(damage)+" damage !"); //Character takes damage
+
+			target.Damage(damage); //Deduct character hp
+		} 
+
+		//Check if one side has been defeated
+		if (fightState.amountOfEnemies == 0) Victory ();
+		else if (charactersInvolved.Count == 0) Defeat ();
+	}
+
 	private void Victory () {
-		ui.Log("Victory!");
+		ui.Log("Victory !");
+		StartCoroutine(Evacuate());
 		OnVictory ();
 	}
 
@@ -162,6 +211,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	private void Defeat () {
 		ui.Log("Retreat !");
+		StartCoroutine(Evacuate());
 		OnDefeat ();
 	}
 

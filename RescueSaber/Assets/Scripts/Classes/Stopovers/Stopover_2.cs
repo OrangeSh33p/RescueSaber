@@ -34,7 +34,7 @@ public class Stopover_2 : Stopover {
 
 	//ENTRIES AND EXITS
 	protected override void OnEnter () {
-		StartCoroutine (Events());
+	//	StartCoroutine (Events());
 	}
 
 	protected override void OnExit () { }	
@@ -44,7 +44,7 @@ public class Stopover_2 : Stopover {
 
 	protected override void OnDefeat () { }	
 
-	//EVENTS
+/* 	//EVENTS
 	private IEnumerator Events() {
 		ui.Log(charactersInvolved[0].name + "sees " + amountOfEnemies + " people");
 		yield return new WaitForSeconds(som.roundDuration);
@@ -72,5 +72,5 @@ public class Stopover_2 : Stopover {
 
 		}
 
-	}
+	} */
 }

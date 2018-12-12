@@ -21,24 +21,23 @@ public class Stopover_1 : Stopover {
 	public int minFood;
 	public int maxFood;
 
-	[Header ("State")]
-	public int amountOfEnemies;
-
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
 		private UIManager ui { get { return gm.uIManager; } }
 
-	//BASIC METHODS
-	protected override void OnStart () {
-		amountOfEnemies = Random.Range(minEnemies, maxEnemies+1);
-	}
-
 	//ENTRIES AND EXITS
 	protected override void OnEnter () {
 		if (charactersInvolved.Count == 1) {
+			int amountOfEnemies = Random.Range(minEnemies, maxEnemies+1);
 			ui.Log(amountOfEnemies + " bandits jump you !");
-			StartCoroutine(Fight( new FightState(amountOfEnemies, minDamage, maxDamage, enemyBig) ));
-		}
+			fightState = new FightState(amountOfEnemies, enemyBig, minDamage, maxDamage);
+		} 
+	}
+
+	protected override void OnEvent() {
+		if (charactersInvolved.Count != 0) {
+			Fight();
+		} 
 	}
 
 	//FIGHT

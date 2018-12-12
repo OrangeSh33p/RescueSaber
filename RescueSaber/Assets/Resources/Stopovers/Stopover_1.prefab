@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterHolder: {fileID: 4349404378451392}
   entrance: {fileID: 4273112408702754}
+  isEnabled: 1
   charactersInvolved: []
   description: 0
   minEnemies: 3
@@ -206,4 +207,3 @@ MonoBehaviour:
   enemyBig: 0.35
   minFood: 1
   maxFood: 4
-  amountOfEnemies: 5

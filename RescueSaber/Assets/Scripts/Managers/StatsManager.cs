@@ -12,6 +12,13 @@ public class StatsManager : MonoSingleton<StatsManager> {
 	//Parameters : a list of character stats (possibly a fake one for a numeric value)	
 	//Return : one of the input stats. Each stat has a chance of being chosen that is proportionate to its value
 	public Character.Stat test (List<Character.Stat> stats) { 
+		string str = "testing : ";
+		foreach(Character.Stat s in stats) {
+			str += "\n - "+s.owner+"'s BIG = "+s.value;
+		}
+		//	Debug.Log(str);
+
+
 		float ran = Random.value * stats.Sum(s => s.value); //Random value between 0 and sum of all input stat values
 
 		float interval = 0;
