@@ -16,14 +16,14 @@ public class UIManager : MonoBehaviour {
 	[Header("Balancing")]
 	public float minTimeBetweenLogs;
 
-	[Header("Balancing : CharaIcon")]
+	[Header("References : CharaIcon")]
 	public string fullFace;
 	public string satedFace;
 	public string hungryFace;
 	public string starvingFace;
 	public string deadFace;
 
-	[Header("Balancing : Stats")]
+	[Header("References : Stats")]
 	public string bigIcon;
 	public string chillIcon;
 	public string sharpIcon;
