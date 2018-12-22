@@ -11,19 +11,18 @@ public abstract class Stopover : MonoBehaviour {
 	public Transform entrance;
 
 	[Header("State")]
-	public bool isEnabled;
 	public List<Character> charactersInvolved;
 	protected int round; //Index of current round. Set it to minus one to stop events
 	protected FightState fightState;
 	private bool signIsGone = false; //True if sign has been showed once. after that, IT IS GONE
 
 	//Storage
-	private GameManager gm { get { return GameManager.Instance; } }
-		private UIManager ui { get { return gm.uIManager; } }
-			private GameObject stopoverSign { get { return ui.stopoverSign; } }
-			private Text stopoverText { get { return ui.stopoverText; } }
-		private StopoverManager som { get { return gm.stopoverManager; } }
-		private StatsManager sm { get { return gm.statsManager; } }
+	protected GameManager gm { get { return GameManager.Instance; } }
+		protected UIManager ui { get { return gm.uIManager; } }
+			protected GameObject stopoverSign { get { return ui.stopoverSign; } }
+			protected Text stopoverText { get { return ui.stopoverText; } }
+		protected StopoverManager som { get { return gm.stopoverManager; } }
+		protected StatsManager sm { get { return gm.statsManager; } }
 
 	//Fightstate struct (used to initialise a fight)
 	[System.Serializable]
@@ -55,6 +54,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	private void Start () {
 		gm.stopover = this;
+		InitializeFightState ();
 		OnStart ();
 	}
 
@@ -119,7 +119,11 @@ public abstract class Stopover : MonoBehaviour {
 
 	protected virtual void OnExit () {}	
 
-	private IEnumerator Evacuate () {
+	protected void Evacuate () {
+		StartCoroutine (_Evacuate());
+	}
+
+	private IEnumerator _Evacuate () {
 		StopEvents();
 		while (charactersInvolved.Count > 0) {
 			yield return new WaitForSeconds(som.roundDuration);
@@ -164,6 +168,12 @@ public abstract class Stopover : MonoBehaviour {
 	// FIGHT
 	//--------------------
 
+	private void InitializeFightState () {
+		//Initialize fightstate if it is null
+		if (fightState.amountOfEnemies == 0 && fightState.enemyBig == 0 && fightState.minDamage == 0 && fightState.maxDamage == 0)
+			fightState = new FightState (true);
+	}
+
 	protected void Fight () { //Play one round of fight
 		//Test all fighters' BIG, result is the one who lands a blow
 		Character.Stat enemyBig = new Character.Stat (null, Character.StatType.BIG, fightState.enemyBig); //Placeholder stat for enemy's BIG
@@ -203,7 +213,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	private void Victory () {
 		ui.Log("Victory !");
-		StartCoroutine(Evacuate());
+		Evacuate();
 		OnVictory ();
 	}
 
@@ -211,7 +221,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	private void Defeat () {
 		ui.Log("Retreat !");
-		StartCoroutine(Evacuate());
+		Evacuate();
 		OnDefeat ();
 	}
 

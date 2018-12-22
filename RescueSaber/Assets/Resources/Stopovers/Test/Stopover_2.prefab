@@ -199,4 +199,7 @@ MonoBehaviour:
   entrance: {fileID: 4273112408702754}
   charactersInvolved: []
   description: 0
-  amountOfEnemies: 0
+  pick:
+    owner: {fileID: 0}
+    type: 0
+    value: 0

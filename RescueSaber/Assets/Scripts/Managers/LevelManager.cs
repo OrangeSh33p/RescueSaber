@@ -26,21 +26,43 @@ public class LevelManager : MonoSingleton<LevelManager> {
 	private List<Material> materials = new List<Material>();
 
 
-	//BASIC METHODS
+	//--------------------
+	// BASIC METHODS
+	//--------------------
+
 	void Start () {
 		LoadResources();
 		PrepareNextStopover();
 	}
 
-	void LoadResources () { //Load stopovers and materials from game files
-		foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers")) 
-			if (s.isEnabled) stopoverPrefabs.Add(s);
 
+	//--------------------
+	// LOADING RESOURCES
+	//--------------------
+
+	void LoadResources () { //Load stopovers and materials from game files	
+		LoadMaterials();
+		LoadStopovers();
+	}
+
+	void LoadStopovers () {	//Play with test stopovers. If none, play with done stopovers.
+		foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Test")) 
+			stopoverPrefabs.Add(s);
+
+		if (stopoverPrefabs.Count == 0)
+			foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Done")) 
+				stopoverPrefabs.Add(s);
+	}
+
+	void LoadMaterials () {
         materials = Resources.LoadAll<Material>("Chunk_materials").ToList();
 	}
 
 
-	//STOPOVERS
+	//--------------------
+	// PREPARING STOPOVERS
+	//--------------------
+
 	void PrepareNextStopover () { //Initialize next stopover's type and distance
 		nextStopover = stopoverPrefabs[Random.Range(0,stopoverPrefabs.Count-1)];
 		chunksToNextStopover = Random.Range(minChunksBetweenStopovers, maxChunksBetweenStopovers);
@@ -54,7 +76,11 @@ public class LevelManager : MonoSingleton<LevelManager> {
 				parent);
 	}
 
-	//CHUNKS
+
+	//--------------------
+	// CREATING LEVELS
+	//--------------------
+
 	public void CreateChunk (Vector3 origin) { //Create chunk at the very front (called by back chunk when destroyed)
 		Chunk chunk = Instantiate( //Create chunk as a child
 				chunkPrefab, 

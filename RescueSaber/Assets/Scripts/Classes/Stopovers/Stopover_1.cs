@@ -21,11 +21,11 @@ public class Stopover_1 : Stopover {
 	public int minFood;
 	public int maxFood;
 
-	//Storage
-	private GameManager gm { get { return GameManager.Instance; } }
-		private UIManager ui { get { return gm.uIManager; } }
 
-	//ENTRIES AND EXITS
+	//--------------------
+	// ENTRIES AND EXITS
+	//--------------------
+
 	protected override void OnEnter () {
 		if (charactersInvolved.Count == 1) {
 			int amountOfEnemies = Random.Range(minEnemies, maxEnemies+1);
@@ -34,13 +34,20 @@ public class Stopover_1 : Stopover {
 		} 
 	}
 
+
+	//--------------------
+	// EVENTS
+	//--------------------
+
 	protected override void OnEvent() {
-		if (charactersInvolved.Count != 0) {
-			Fight();
-		} 
+		if (charactersInvolved.Count != 0) Fight();
 	}
 
-	//FIGHT
+
+	//--------------------
+	// FIGHT
+	//--------------------
+
 	protected override void OnVictory() {
 			int foodGained = Random.Range(minFood, maxFood+1);
 			gm.foodManager.AddFood(foodGained);

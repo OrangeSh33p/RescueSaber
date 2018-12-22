@@ -67,9 +67,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4238723035028376}
-  - component: {fileID: 114917011165851914}
+  - component: {fileID: 114918969431853966}
   m_Layer: 0
-  m_Name: Stopover_1
+  m_Name: Stopover_0_Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114917011165851914
+--- !u!114 &114918969431853966
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,18 +192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845800958249290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b8cb926cbb3834fa688e72cdffe29c, type: 3}
+  m_Script: {fileID: 11500000, guid: 71f9c134723a0a744b8fd7efd352a834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterHolder: {fileID: 4349404378451392}
   entrance: {fileID: 4273112408702754}
-  isEnabled: 1
   charactersInvolved: []
   description: 0
-  minEnemies: 3
-  maxEnemies: 5
-  minDamage: 0
-  maxDamage: 0.4
-  enemyBig: 0.35
-  minFood: 1
-  maxFood: 4

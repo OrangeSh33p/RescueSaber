@@ -69,7 +69,10 @@ public class Character : MonoBehaviour {
 			return _characters; } }
 
 
-	//BASIC METHODS
+	//--------------------
+	// BASIC METHODS
+	//--------------------
+
 	void Start () {
 		characters.Add(this);
 		GetInBus();
@@ -97,7 +100,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//UI
+	//--------------------
+	// UI
+	//--------------------
+
 	void InitIcon() {
 		SetHP(hp);
 		icon.SetName(gameObject.name);
@@ -106,7 +112,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//HP
+	//--------------------
+	// HP
+	//--------------------
+
 	public void SetHP (float value) {
 		hp = Mathf.Clamp01(value);
 		icon.SetHP(hp);
@@ -131,7 +140,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//STATS
+	//--------------------
+	// STATS
+	//--------------------
+
 	void InitStats() {
 		hp = 1;
 
@@ -148,7 +160,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//HUNGER
+	//--------------------
+	// HUNGER
+	//--------------------
+
 	void SetHunger (Hunger hunger) {
 		this.hunger = hunger;
 		icon.SetFace(hunger);
@@ -194,7 +209,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//BUS
+	//--------------------
+	// BUS
+	//--------------------
+	
 	void WalkToBus () {
 		transform.LookAt(busPos);
 		transform.position += transform.forward * Time.deltaTime * walkSpeed; //Walk towards target
@@ -222,7 +240,10 @@ public class Character : MonoBehaviour {
 	}
 
 
-	//STOPOVER
+	//--------------------
+	// STOPOVER
+	//--------------------
+
 	void WalkToStopover () {
 		Vector3 target = stopover.entrance.position;
 		
