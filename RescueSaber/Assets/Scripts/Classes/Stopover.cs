@@ -226,4 +226,16 @@ public abstract class Stopover : MonoBehaviour {
 	}
 
 	protected virtual void OnDefeat () { }
+
+	//--------------------
+	// ADD & REMOVE CHARACTERS
+	//--------------------
+
+	protected void AddCharacter () {
+
+	}
+
+	protected void RemoveCharacter (string CharacterName) {
+		
+	}
 }
