@@ -9,6 +9,7 @@ public class CharacterIcon : MonoBehaviour {
 	public Slider hpBar;
 	public Image hpBarColor;
 	public Text face;
+	public Image icon;
 	public Text charaName;
 	public Text stats;
 	

@@ -45,7 +45,7 @@ public class Stopover_2 : Stopover {
 
 	protected override void OnEvent () {
 		if (round == 1) {
-			ui.Log(charactersInvolved[0].name + "sees " + fightState.amountOfEnemies + " people");
+			ui.Log(charactersInvolved[0].name + " sees " + fightState.amountOfEnemies + " people");
 			ui.Log("Their motives are yet unclear.");
 			ui.Log("...");
 		}

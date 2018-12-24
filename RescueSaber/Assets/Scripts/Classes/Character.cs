@@ -10,8 +10,9 @@ public class Character : MonoBehaviour {
 	public float contactDistance; //distance past which you are considered in contact with an object
 
 	[Header("References")]
-	public Transform visuals;
 	public CharacterIcon icon;
+	public Transform visuals; //Object to hide in order to make the character invisible
+	public List<MeshRenderer> colors; //Objects to change in order to change the character's colors
 
 	[Header("State : General")]
 	public State state;
@@ -28,24 +29,36 @@ public class Character : MonoBehaviour {
 	float timeSinceLastMeal;
 
 	[Header("State : Bus Position")]
-	public BusSide side;
-	public float rank;
+	public Seat seat;
 	
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
 		private Bus bus { get { return gm.bus; } }
 			private Vector3 busPos { get { return bus.transform.position; } }
+		private CharacterManager characterManager { get { return gm.characterManager; } }
 		private FoodManager food { get { return gm.foodManager; } }
+		private StatsManager sm { get { return gm.statsManager; } }
 		private Stopover stopover { get { return gm.stopover; } }
 		private TimeManager timeManager { get { return gm.timeManager; } }
 		private UIManager ui { get { return gm.uIManager; } }
-		private StatsManager sm { get { return gm.statsManager; } }
 
 	//Enums
 	public enum State {BUS, STOPOVER, WALKING_TO_BUS, WALKING_TO_STOPOVER}
 	public enum BusSide {LEFT, RIGHT}
 	public enum Hunger {DEAD, STARVING, HUNGRY, SATED, FULL}
 	public enum StatType {BIG, CHILL, SHARP, SMOOTH}
+
+	//Bus seat struct
+	[System.Serializable]
+	public struct Seat {
+		public BusSide side;
+		public float rank;
+
+		public Seat (BusSide side, float rank) {
+			this.side = side;
+			this.rank = rank;
+		}
+	}
 
 	//Stat struct
 	[System.Serializable]
@@ -91,6 +104,8 @@ public class Character : MonoBehaviour {
 		IncreaseHunger();
 
 		if (Input.GetKeyDown(KeyCode.T)) StatTest();
+		if (Input.GetKeyDown(KeyCode.A) && transform.GetSiblingIndex() == 0) characterManager.Add();
+		if (Input.GetKeyDown(KeyCode.R)) characters[0].Remove();
 	}
 
 	void OnDestroy () {
@@ -105,10 +120,12 @@ public class Character : MonoBehaviour {
 	//--------------------
 
 	void InitIcon() {
+		icon.character = this;
 		SetHP(hp);
 		icon.SetName(gameObject.name);
 		icon.SetStats(big.value, chill.value, sharp.value, smooth.value);
 		icon.SetFace(hunger);
+		icon.name = this.name + " icon";
 	}
 
 
@@ -133,10 +150,12 @@ public class Character : MonoBehaviour {
 
 	void Death (string message) {
 		ui.Log(message);
+		Remove();
+	}
 
-		icon.SetHP(0);
-		icon.Death();
-		Destroy(gameObject);
+	public void Remove () {
+		Destroy(icon.gameObject);
+		Destroy(gameObject);		
 	}
 
 
@@ -223,20 +242,38 @@ public class Character : MonoBehaviour {
 	void GetInBus() {
 		state = State.BUS;
 		transform.parent = bus.characterHolder; //Become child of the bus
-
-		Vector3 newPos = new Vector3(); //Calculate right position inside bus
-		if (side == BusSide.LEFT) newPos += Vector3.right * bus.leftSeatX;
-		else if (side == BusSide.RIGHT) newPos += Vector3.right * bus.rightSeatX;
-		newPos += Vector3.forward * (bus.rank0Z - rank * bus.distanceBetweenRanks);
-
-		transform.localPosition = newPos; //Move to your assigned seat
-		transform.rotation = Quaternion.identity; //Look forward
+		Sit();
 	}
 
 	public void ExitBus () {
 		transform.position = bus.busExit.position;
 		transform.parent = stopover.characterHolder; //Become a child of the stopover
 		state = State.WALKING_TO_STOPOVER;
+	}
+
+	public void FindSeat () {
+		List<Seat> freeSeats = new List<Seat>(); //Make a list of seats
+		for (int i=0; i<bus.amountOfRanks; i++) { //Add all existing seats
+			freeSeats.Add(new Seat (BusSide.LEFT, i));
+			freeSeats.Add(new Seat (BusSide.RIGHT, i));
+		}
+
+		freeSeats.RemoveAt(0); //Nobody can sit at the driver's seat
+		foreach(Character c in characters) freeSeats.Remove(c.seat); //Or at somebody else's seat
+
+		seat = freeSeats[Random.Range(0,freeSeats.Count)]; //But the other ones are free :D
+	}
+
+	public void Sit () { //Get character asset to its assigned position in the bus
+		if(seat.rank == 0 && seat.side == BusSide.LEFT) FindSeat(); //If no seat assigned, find one
+
+		Vector3 newPos = new Vector3();
+		if (seat.side == BusSide.LEFT) newPos += Vector3.right * bus.leftSeatX; //X position
+		else if (seat.side == BusSide.RIGHT) newPos += Vector3.right * bus.rightSeatX;
+		newPos += Vector3.forward * (bus.rank0Z - seat.rank * bus.distanceBetweenRanks); //Z position
+
+		transform.localPosition = newPos; //Move to your assigned seat
+		transform.rotation = Quaternion.identity; //Look forward
 	}
 
 
@@ -255,13 +292,27 @@ public class Character : MonoBehaviour {
 
 	void GetInStopover () {
 			state = State.STOPOVER;
-			visuals.gameObject.SetActive(false); //become invisible
+			SetVisible(false);
 			stopover.Enter(this);
 	}
 
 	public void ExitStopover () {
 			state = State.WALKING_TO_BUS;
-			visuals.gameObject.SetActive(true); //become visible
+			SetVisible(true);
 			stopover.Exit(this);
+	}
+
+
+	//--------------------
+	// APPEARANCE
+	//--------------------
+
+	void SetVisible (bool value) { //true = make visible, false = make invisible
+		visuals.gameObject.SetActive(value);
+	}
+
+	public void SetColor (Material color) {
+		foreach (MeshRenderer mr in colors)
+			mr.material = color;
 	}
 }

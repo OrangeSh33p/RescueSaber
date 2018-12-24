@@ -14,6 +14,7 @@ public class Bus : MonoBehaviour {
 	public float rightSeatX;
 	public float rank0Z;
 	public float distanceBetweenRanks;
+	public int amountOfRanks;
 
 	[Header("References")]
 	public GameObject LD;

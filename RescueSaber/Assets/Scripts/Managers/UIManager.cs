@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour {
 	public Text stopoverText;
 	public Transform console;
 	public GameObject logPrefab;
+	public GameObject sideMenu;
 
 	//State
 	private float timeSinceLastLog;

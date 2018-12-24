@@ -156,13 +156,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
-  hp: 0
+  icon: {fileID: 0}
+  visuals: {fileID: 4621371081952126}
+  colors:
+  - {fileID: 23796311481766920}
   state: 0
+  hp: 0
+  big:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  chill:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  sharp:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  smooth:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  hunger: 0
   side: 0
   rank: 0
-  hunger: 0
-  visuals: {fileID: 0}
-  icon: {fileID: 0}
 --- !u!136 &136238971631615708
 CapsuleCollider:
   m_ObjectHideFlags: 1

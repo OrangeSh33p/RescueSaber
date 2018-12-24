@@ -18,6 +18,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	//Storage
 	protected GameManager gm { get { return GameManager.Instance; } }
+		private Bus bus { get { return gm.bus; } }
 		protected UIManager ui { get { return gm.uIManager; } }
 			protected GameObject stopoverSign { get { return ui.stopoverSign; } }
 			protected Text stopoverText { get { return ui.stopoverText; } }
@@ -226,16 +227,4 @@ public abstract class Stopover : MonoBehaviour {
 	}
 
 	protected virtual void OnDefeat () { }
-
-	//--------------------
-	// ADD & REMOVE CHARACTERS
-	//--------------------
-
-	protected void AddCharacter () {
-
-	}
-
-	protected void RemoveCharacter (string CharacterName) {
-		
-	}
 }

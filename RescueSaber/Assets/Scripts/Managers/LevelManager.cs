@@ -22,6 +22,8 @@ public class LevelManager : MonoSingleton<LevelManager> {
 
 	//Storage
 	private GameManager gm { get { return GameManager.Instance; } }
+
+	//Resources
 	private List<Stopover> stopoverPrefabs = new List<Stopover>();
 	private List<Material> materials = new List<Material>();
 

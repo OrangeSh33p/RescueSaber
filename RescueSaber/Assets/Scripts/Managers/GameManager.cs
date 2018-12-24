@@ -7,7 +7,9 @@ public class GameManager : MonoSingleton<GameManager> {
     public Bus bus;
     public Stopover stopover;
 
+    [Header("Manager")]
     public CameraManager cameraManager;
+    public CharacterManager characterManager;
     public FoodManager foodManager;
     public LevelManager levelManager;
     public StatsManager statsManager;

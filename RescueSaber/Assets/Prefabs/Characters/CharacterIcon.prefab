@@ -237,7 +237,9 @@ MonoBehaviour:
   hpBar: {fileID: 114734174098946130}
   hpBarColor: {fileID: 114968293924018666}
   face: {fileID: 114694328555012062}
+  icon: {fileID: 114131338650348118}
   charaName: {fileID: 114406027143750720}
+  stats: {fileID: 114346624800979172}
 --- !u!114 &114346624800979172
 MonoBehaviour:
   m_ObjectHideFlags: 1

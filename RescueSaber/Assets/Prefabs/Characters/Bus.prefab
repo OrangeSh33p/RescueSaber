@@ -899,6 +899,7 @@ MonoBehaviour:
   LD: {fileID: 0}
   characterHolder: {fileID: 4336537226872600}
   busExit: {fileID: 4417771187646936}
+  currentSpeed: 0
 --- !u!114 &114745427755936700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -912,13 +913,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
+  icon: {fileID: 0}
+  visuals: {fileID: 4787503821970342}
+  colors:
+  - {fileID: 23418307294200290}
+  state: 0
+  hp: 1
+  big:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  chill:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  sharp:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  smooth:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  hunger: 0
   side: 1
   rank: 2
-  visuals: {fileID: 4787503821970342}
-  icon: {fileID: 0}
-  hp: 1
-  state: 0
-  hunger: 0
 --- !u!114 &114764062818120204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -932,13 +951,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
+  icon: {fileID: 0}
+  visuals: {fileID: 4874060959702898}
+  colors:
+  - {fileID: 23572819809532188}
+  state: 0
+  hp: 1
+  big:
+    owner: {fileID: 114764062818120204}
+    type: 0
+    value: 0
+  chill:
+    owner: {fileID: 114764062818120204}
+    type: 0
+    value: 0
+  sharp:
+    owner: {fileID: 114764062818120204}
+    type: 0
+    value: 0
+  smooth:
+    owner: {fileID: 114764062818120204}
+    type: 0
+    value: 0
+  hunger: 0
   side: 1
   rank: 0
-  visuals: {fileID: 4874060959702898}
-  icon: {fileID: 0}
-  hp: 1
-  state: 0
-  hunger: 0
 --- !u!114 &114876332956374504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -952,13 +989,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1
   contactDistance: 2
+  icon: {fileID: 0}
+  visuals: {fileID: 4531599163494406}
+  colors:
+  - {fileID: 23679351163129980}
+  state: 0
+  hp: 1
+  big:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  chill:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  sharp:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  smooth:
+    owner: {fileID: 0}
+    type: 0
+    value: 0
+  hunger: 0
   side: 0
   rank: 3
-  visuals: {fileID: 4531599163494406}
-  icon: {fileID: 0}
-  hp: 1
-  state: 0
-  hunger: 0
 --- !u!136 &136053141608006256
 CapsuleCollider:
   m_ObjectHideFlags: 1
