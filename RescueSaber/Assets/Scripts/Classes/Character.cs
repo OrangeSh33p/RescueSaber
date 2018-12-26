@@ -86,8 +86,11 @@ public class Character : MonoBehaviour {
 	// BASIC METHODS
 	//--------------------
 
-	void Start () {
+	void Awake () {
 		characters.Add(this);
+	}
+
+	void Start () {
 		GetInBus();
 		SetHunger(Hunger.SATED);
 		InitStats();

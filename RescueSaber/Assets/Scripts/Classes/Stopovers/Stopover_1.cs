@@ -49,8 +49,8 @@ public class Stopover_1 : Stopover {
 	//--------------------
 
 	protected override void OnVictory() {
-			int foodGained = Random.Range(minFood, maxFood+1);
-			gm.foodManager.AddFood(foodGained);
-			ui.Log("You find "+foodGained+" food in the ruins");
+		int foodGained = Random.Range(minFood, maxFood+1);
+		gm.foodManager.AddFood(foodGained);
+		ui.Log("You find "+foodGained+" food in the ruins");
 	}
 }

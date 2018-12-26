@@ -47,13 +47,13 @@ public class LevelManager : MonoSingleton<LevelManager> {
 		LoadStopovers();
 	}
 
-	void LoadStopovers () {	//Play with test stopovers. If none, play with done stopovers.
-		foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Test")) 
-			stopoverPrefabs.Add(s);
+	void LoadStopovers () { //Load stopovers from /Exclusive_test. If none, load from /Done and /Test
+		foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Exclusive_test")) stopoverPrefabs.Add(s);
 
-		if (stopoverPrefabs.Count == 0)
-			foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Done")) 
-				stopoverPrefabs.Add(s);
+		if (stopoverPrefabs.Count == 0) {
+			foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Done")) stopoverPrefabs.Add(s);
+			foreach (Stopover s in Resources.LoadAll<Stopover>("Stopovers/Test")) stopoverPrefabs.Add(s);
+		}
 	}
 
 	void LoadMaterials () {

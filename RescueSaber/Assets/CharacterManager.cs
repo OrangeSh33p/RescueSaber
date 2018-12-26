@@ -5,6 +5,7 @@ using System.Linq;
 
 public class CharacterManager : MonoSingleton<CharacterManager> {
 	[Header("Balancing")]
+	public int StartingAmountOfCharacters;
 	public List<string> names;
 
 	[Header("References")]
@@ -26,6 +27,9 @@ public class CharacterManager : MonoSingleton<CharacterManager> {
 
 	void Start () {
 		LoadResources();
+		Debug.Log(Character.characters.Count);
+		foreach (Character c in Character.characters) c.Remove();
+		for (int i=0;i<StartingAmountOfCharacters;i++) Add();
 	}
 
 

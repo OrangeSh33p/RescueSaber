@@ -11,8 +11,8 @@ public class FoodManager : MonoSingleton<FoodManager> {
 	[Header("References")]
 	public FoodIcon foodIcon;
 
-	//State
-	private int food;
+	[Header("State")]
+	public int food;
 
 	void Start () {
 		SetFood(startFood);

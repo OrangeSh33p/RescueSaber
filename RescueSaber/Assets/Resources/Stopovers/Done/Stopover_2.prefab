@@ -199,6 +199,16 @@ MonoBehaviour:
   entrance: {fileID: 4273112408702754}
   charactersInvolved: []
   description: 0
+  minFoodReward: 1
+  maxFoodReward: 4
+  minFoodGift: 1
+  maxFoodGift: 2
+  minFoodShared: 1
+  maxFoodShared: 2
+  healChance: 0.5
+  minHeal: 0.1
+  maxHeal: 0.4
+  healPercentIfInsufficientFood: 0.5
   pick:
     owner: {fileID: 0}
     type: 0

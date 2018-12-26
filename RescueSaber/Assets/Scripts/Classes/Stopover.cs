@@ -18,12 +18,14 @@ public abstract class Stopover : MonoBehaviour {
 
 	//Storage
 	protected GameManager gm { get { return GameManager.Instance; } }
-		private Bus bus { get { return gm.bus; } }
+		protected Bus bus { get { return gm.bus; } }
+		protected CharacterManager characterManager { get { return gm.characterManager; } }
+		protected FoodManager food { get { return gm.foodManager; } }
+		protected StatsManager sm { get { return gm.statsManager; } }
+		protected StopoverManager som { get { return gm.stopoverManager; } }
 		protected UIManager ui { get { return gm.uIManager; } }
 			protected GameObject stopoverSign { get { return ui.stopoverSign; } }
 			protected Text stopoverText { get { return ui.stopoverText; } }
-		protected StopoverManager som { get { return gm.stopoverManager; } }
-		protected StatsManager sm { get { return gm.statsManager; } }
 
 	//Fightstate struct (used to initialise a fight)
 	[System.Serializable]

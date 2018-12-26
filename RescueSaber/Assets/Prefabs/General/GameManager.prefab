@@ -289,10 +289,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43e1e8b64cfaa344a5092e52fda381f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingAmountOfCharacters: 3
+  names:
+  - Anita
+  - Marc
+  - Lucy
+  - Mari
+  - Arthur
+  - Nico
+  - Felix
+  - Michele
+  - Malu
+  - Ana
   characterPrefab: {fileID: 114723486545143846, guid: ca614f56a0e6f534c94231f8f5168a45,
     type: 2}
   characterIconPrefab: {fileID: 114313788481185336, guid: 8251b50e2a7564747922b98888f615f6,
     type: 2}
+  materials: []
 --- !u!114 &114758608716094778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,6 +321,7 @@ MonoBehaviour:
   maxHpRegen: 0.15
   startFood: 5
   foodIcon: {fileID: 0}
+  food: 0
 --- !u!114 &114933852947489346
 MonoBehaviour:
   m_ObjectHideFlags: 1

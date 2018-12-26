@@ -131,16 +131,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: materials.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -173,6 +163,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: foodIcon
+      value: 
+      objectReference: {fileID: 465636821}
     - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
       propertyPath: bus
@@ -193,61 +188,6 @@ Prefab:
       propertyPath: uIManager
       value: 
       objectReference: {fileID: 1541186995}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: foodIcon
-      value: 
-      objectReference: {fileID: 465636821}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[0]
-      value: Anita
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[1]
-      value: Marc
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[2]
-      value: Lucy
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[3]
-      value: Mari
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[4]
-      value: Arthur
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[5]
-      value: Nico
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[6]
-      value: Felix
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[7]
-      value: Michele
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[8]
-      value: Malu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114600971089465282, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: names.Array.data[9]
-      value: Ana
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
   m_IsPrefabAsset: 0
