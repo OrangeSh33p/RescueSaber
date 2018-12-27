@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657922, g: 0.49641544, b: 0.5748184, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641508, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -124,73 +124,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 643855351}
   m_Script: {fileID: 11500000, guid: f8782245a16334d47bc1c0ce3b295230, type: 3}
---- !u!1001 &204900886
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: foodIcon
-      value: 
-      objectReference: {fileID: 465636821}
-    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: bus
-      value: 
-      objectReference: {fileID: 803839852}
-    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: cameraManager
-      value: 
-      objectReference: {fileID: 534669906}
-    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: levelManager
-      value: 
-      objectReference: {fileID: 1938435384}
-    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: uIManager
-      value: 
-      objectReference: {fileID: 1541186995}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!114 &465636821 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114629315205822178, guid: b3324bce08579a247a6bf4752386dcb7,
@@ -625,6 +558,78 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1198794804}
   m_Script: {fileID: 11500000, guid: 2bc3efe06c57ef5498ae97ecfeebc3bb, type: 3}
+--- !u!1001 &2011342386
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614158937441112, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: foodIcon
+      value: 
+      objectReference: {fileID: 465636821}
+    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: bus
+      value: 
+      objectReference: {fileID: 803839852}
+    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: cameraManager
+      value: 
+      objectReference: {fileID: 534669906}
+    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1938435384}
+    - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: uIManager
+      value: 
+      objectReference: {fileID: 1541186995}
+    - target: {fileID: 114114901280012114, guid: 1d899f29361541e4e9d21c2014adfcd3,
+        type: 2}
+      propertyPath: dialogues
+      value: 
+      objectReference: {fileID: 4900000, guid: 560048359850c4d428ad6568e648090e, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!114 &2011411486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114424863139698524, guid: b3324bce08579a247a6bf4752386dcb7,

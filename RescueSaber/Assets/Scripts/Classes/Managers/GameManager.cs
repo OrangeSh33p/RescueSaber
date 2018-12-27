@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager> {
     [Header("Manager")]
     public CameraManager cameraManager;
     public CharacterManager characterManager;
+    public DialogueManager dialogueManager;
     public FoodManager foodManager;
     public LevelManager levelManager;
     public StatsManager statsManager;
