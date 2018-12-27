@@ -1,0 +1,5 @@
+Stopover,Segment,Line,Character index,Character,Text,Comment
+1,1,1,1,Sharpest,<amount> bandits ambushed us !,amount = amount of bandits.
+1,2,1,2,Biggest,That was a close one.,
+1,2,2,1,Sharpest (reroll),Look ! I found <amount> food !,amount = amount of food.
+1,2,3,3,Smoothest,Neat !,
