@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public abstract class Stopover : MonoBehaviour {
 	[Header ("General")]
 
+	[Header("Balancing")]
+	[Tooltip("The reference number of the stopover. Used to link it to dialogues.")]
+	public int index;
+
 	[Header("References")]
 	public Transform characterHolder;
 	public Transform entrance;
@@ -47,6 +51,26 @@ public abstract class Stopover : MonoBehaviour {
 			this.enemyBig = enemyBig;
 			this.minDamage = minDamage;
 			this.maxDamage = maxDamage;
+		}
+	}
+
+	//Dialogue
+	[System.Serializable]
+	public struct line {
+		
+	}
+
+	[System.Serializable]
+	public struct Segment {
+
+	}
+
+	[System.Serializable]
+	public struct Dialogue {
+		
+
+		public Dialogue (string source) {
+
 		}
 	}
 
