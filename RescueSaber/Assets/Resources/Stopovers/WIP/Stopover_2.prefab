@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507ecca884e45b048866dc6c07a191d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 2
   characterHolder: {fileID: 4349404378451392}
   entrance: {fileID: 4273112408702754}
   charactersInvolved: []

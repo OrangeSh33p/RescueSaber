@@ -7,7 +7,7 @@ public abstract class Stopover : MonoBehaviour {
 	[Header ("General")]
 
 	[Header("Balancing")]
-	[Tooltip("The reference number of the stopover. Used to link it to dialogues.")]
+	[Tooltip("The reference number of the stopover")]
 	public int index;
 
 	[Header("References")]
@@ -16,6 +16,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	[Header("State")]
 	public List<Character> charactersInvolved;
+	public Dictionary<string, Line> dialogue;
 	protected int round; //Index of current round. Set it to minus one to stop events
 	protected FightState fightState;
 	private bool signIsGone = false; //True if sign has been showed once. after that, IT IS GONE
@@ -24,6 +25,7 @@ public abstract class Stopover : MonoBehaviour {
 	protected GameManager gm { get { return GameManager.Instance; } }
 		protected Bus bus { get { return gm.bus; } }
 		protected CharacterManager characterManager { get { return gm.characterManager; } }
+		protected DialogueManager dialogueManager { get { return gm.dialogueManager; } }
 		protected FoodManager food { get { return gm.foodManager; } }
 		protected StatsManager sm { get { return gm.statsManager; } }
 		protected StopoverManager som { get { return gm.stopoverManager; } }
@@ -54,26 +56,6 @@ public abstract class Stopover : MonoBehaviour {
 		}
 	}
 
-	//Dialogue
-	[System.Serializable]
-	public struct line {
-		
-	}
-
-	[System.Serializable]
-	public struct Segment {
-
-	}
-
-	[System.Serializable]
-	public struct Dialogue {
-		
-
-		public Dialogue (string source) {
-
-		}
-	}
-
 
 	//--------------------
 	// BASIC METHODS
@@ -82,6 +64,7 @@ public abstract class Stopover : MonoBehaviour {
 	private void Start () {
 		gm.stopover = this;
 		InitializeFightState ();
+		dialogue = dialogueManager.ParseOnStopover(index);
 		OnStart ();
 	}
 

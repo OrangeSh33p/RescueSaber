@@ -597,11 +597,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: foodIcon
-      value: 
-      objectReference: {fileID: 465636821}
     - target: {fileID: 114212293039097200, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
       propertyPath: bus
@@ -622,16 +617,11 @@ Prefab:
       propertyPath: uIManager
       value: 
       objectReference: {fileID: 1541186995}
-    - target: {fileID: 114114901280012114, guid: 1d899f29361541e4e9d21c2014adfcd3,
+    - target: {fileID: 114758608716094778, guid: 1d899f29361541e4e9d21c2014adfcd3,
         type: 2}
-      propertyPath: dialogues
+      propertyPath: foodIcon
       value: 
-      objectReference: {fileID: 4900000, guid: 560048359850c4d428ad6568e648090e, type: 3}
-    - target: {fileID: 114114901280012114, guid: 1d899f29361541e4e9d21c2014adfcd3,
-        type: 2}
-      propertyPath: dialogueSource
-      value: 
-      objectReference: {fileID: 4900000, guid: 2a721e3e68d11e94794995a36bb8ddb4, type: 3}
+      objectReference: {fileID: 465636821}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d899f29361541e4e9d21c2014adfcd3, type: 2}
   m_IsPrefabAsset: 0
