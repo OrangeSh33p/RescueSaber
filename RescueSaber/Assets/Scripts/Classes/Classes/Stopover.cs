@@ -8,7 +8,7 @@ public abstract class Stopover : MonoBehaviour {
 
 	[Header("Balancing")]
 	[Tooltip("The reference number of the stopover")]
-	public int index;
+	public string index;
 
 	[Header("References")]
 	public Transform characterHolder;
