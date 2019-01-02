@@ -25,14 +25,14 @@ public class DialogueManager : MonoSingleton<DialogueManager> {
 	Dictionary<int,string> ParseOnStart (string source) {
 		Dictionary<int, string> dic = new Dictionary<int, string>();
 		foreach (string s in source.Split('\n')) {
-			string currentStopover = s.Split(',')[stopoverColumn];
-			if (dic.ContainsKey(currentStopover)) dic[currentStopover] += '\n'+s;
-			else dic.Add(currentStopover,s);
+			string key = s.Split(',')[stopoverColumn];
+			if (dic.ContainsKey(key)) dic[key] += '\n'+s;
+			else dic.Add(key,s);
 		}
 		return dic;
 	}
 
-	public Dictionary<string, Line> ParseOnStopover (int stopoverIndex) {
+	public Dictionary<string, Line> ParseOnStopover (string stopoverIndex) {
 		string source = parsedDialogue[stopoverIndex];
 		Dictionary<string, Line> dic = new Dictionary<string, Line>();
 		foreach (string s in source.Split('\n')) {
