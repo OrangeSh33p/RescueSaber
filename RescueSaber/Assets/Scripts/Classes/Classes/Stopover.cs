@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public abstract class Stopover : MonoBehaviour {
 	[Header ("General")]
 
 	[Header("Balancing")]
-	[Tooltip("The reference number of the stopover")]
 	public string index;
 
 	[Header("References")]
@@ -17,6 +17,7 @@ public abstract class Stopover : MonoBehaviour {
 	[Header("State")]
 	public List<Character> charactersInvolved;
 	public Dictionary<string, Line> dialogue;
+	protected Dictionary<string, Character> dialogueCharacters = new Dictionary<string, Character>();
 	protected int round; //Index of current round. Set it to minus one to stop events
 	protected FightState fightState;
 	private bool signIsGone = false; //True if sign has been showed once. after that, IT IS GONE
@@ -192,7 +193,7 @@ public abstract class Stopover : MonoBehaviour {
 		foreach (Character character in charactersInvolved) fighters.Add(character.big); //Add all characters
 		for (int i=0;i<fightState.amountOfEnemies;i++) fighters.Add(enemyBig); //Add all enemies
 
-		Character attacker = sm.test(fighters).owner; //Test values against each other, owner of the winning stat becomes attacker
+		Character attacker = sm.Test(fighters).owner; //Test values against each other, owner of the winning stat becomes attacker
 
 		//If enemy is hit (attacker is a character)
 		if (attacker != null) {
@@ -236,4 +237,33 @@ public abstract class Stopover : MonoBehaviour {
 	}
 
 	protected virtual void OnDefeat () { }
+
+
+	//--------------------
+	// DIALOGUE
+	//--------------------
+
+	private Character GetCharacter (string characterDescription) {
+		Character output = null;
+		if (dialogueCharacters.ContainsKey(characterDescription)) output = dialogueCharacters[characterDescription];
+		else {
+			switch (characterDescription) {
+				case "biggest" : output = sm.Test(charactersInvolved.Select(c=>c.big).ToList()).owner; break;
+				case "chillest" : output = sm.Test(charactersInvolved.Select(c=>c.chill).ToList()).owner; break;
+				case "sharpest" : output = sm.Test(charactersInvolved.Select(c=>c.sharp).ToList()).owner; break;
+				case "smoothest" : output = sm.Test(charactersInvolved.Select(c=>c.smooth).ToList()).owner; break;
+				default : OnGetCharacter (characterDescription); break;
+			}
+			if (output == null) Debug.LogError("Error in dialog script of stopover "+index+
+				" : character "+characterDescription+" is not recognized");
+			else dialogueCharacters.Add(characterDescription,output);
+		}
+		return output;
+	}
+
+	protected virtual Character OnGetCharacter (string characterDescription) { return null; }
+
+	private void ReadLine (Line line) {
+		ui.Log(GetCharacter(line.character).name+" : "+line.text);
+	}
 }

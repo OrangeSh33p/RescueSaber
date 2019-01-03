@@ -16,14 +16,14 @@ public class DialogueManager : MonoSingleton<DialogueManager> {
 	public TextAsset dialogueSource;
 
 	[Header("State")]
-	public Dictionary<int, string> parsedDialogue;
+	public Dictionary<string, string> parsedDialogue;
 
 	void Start () {
 		parsedDialogue = ParseOnStart(dialogueSource.ToString());
 	}
 
-	Dictionary<int,string> ParseOnStart (string source) {
-		Dictionary<int, string> dic = new Dictionary<int, string>();
+	Dictionary<string,string> ParseOnStart (string source) {
+		Dictionary<string, string> dic = new Dictionary<string, string>();
 		foreach (string s in source.Split('\n')) {
 			string key = s.Split(',')[stopoverColumn];
 			if (dic.ContainsKey(key)) dic[key] += '\n'+s;

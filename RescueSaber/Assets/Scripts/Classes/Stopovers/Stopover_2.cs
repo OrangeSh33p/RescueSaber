@@ -77,7 +77,7 @@ public class Stopover_2 : Stopover {
 				characterStats.Add(character.sharp);
 				characterStats.Add(character.smooth);
 			}
-			pick = sm.test(characterStats);
+			pick = sm.Test(characterStats);
 		}
 
 		// BIG

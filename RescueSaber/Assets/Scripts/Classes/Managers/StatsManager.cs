@@ -11,7 +11,7 @@ public class StatsManager : MonoSingleton<StatsManager> {
 	//Test method : pick one among a selection of player stats.
 	//Parameters : a list of character stats (possibly a fake one for a numeric value)	
 	//Return : one of the input stats. Each stat has a chance of being chosen that is proportionate to its value
-	public Character.Stat test (List<Character.Stat> stats) { 
+	public Character.Stat Test (List<Character.Stat> stats) { 
 		string str = "testing : ";
 		foreach(Character.Stat s in stats) {
 			str += "\n - "+s.owner+"'s BIG = "+s.value;
@@ -36,8 +36,8 @@ public class StatsManager : MonoSingleton<StatsManager> {
 	}
 
 	//Out : the degree of success for the test (a random value between 0 and the value of the chosen stat)
-	public Character.Stat test (List<Character.Stat> stats, out float bonus) { 
-		Character.Stat result = test(stats);
+	public Character.Stat Test (List<Character.Stat> stats, out float bonus) { 
+		Character.Stat result = Test(stats);
 		bonus = Random.Range(0, result.value);
 		return result;
 	}
